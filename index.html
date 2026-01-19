@@ -664,6 +664,59 @@
             .products-grid { grid-template-columns: 1fr; }
         }
 
+        /* ==================== PROJECTS ==================== */
+        .projects {
+            background: var(--dark-2);
+        }
+
+        .projects::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(255, 232, 31, 0.05) 0%, transparent 35%),
+                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--dark-3);
+            border: 1px solid var(--dark-4);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .project-card a:hover {
+            color: var(--cream);
+        }
+
+        .project-meta {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
         .product-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
@@ -1969,21 +2022,21 @@
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">Month 6-8</div>
+                    <div class="timeline-date">Months 6-7</div>
                     <div class="timeline-content">
                         <h4>Iron Arcade Launch</h4>
                         <p>Launch standalone game, release distributable cabinets, onboard partner games.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">Month 9</div>
+                    <div class="timeline-date">Months 8-9</div>
                     <div class="timeline-content">
                         <h4>Club Phoenix Production</h4>
                         <p>Alpha live. Final production: lighting, sound, VIP areas, artist booking.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">Month 10-12</div>
+                    <div class="timeline-date">Months 10-12</div>
                     <div class="timeline-content">
                         <h4>Club Launch + Growth</h4>
                         <p>Grand opening, brand partnerships, sustainable revenue.</p>
@@ -2011,15 +2064,15 @@
                         <h3>Why It Works</h3>
                         <ul class="feature-list">
                             <li><strong>RTS underserved on Roblox</strong> with high demand</li>
-                            <li><strong>Session-based</strong> drives replay rate</li>
-                            <li><strong>Competitive ladder</strong> drives retention</li>
+                            <li><strong>Round-based gameplay</strong> drives replay rate</li>
+                            <li><strong>Competitive ranked mode</strong> drives retention</li>
                         </ul>
                     </div>
                     <div class="content-block">
                         <h3>Monetization</h3>
                         <ul class="feature-list">
-                            <li><strong>Battle Pass:</strong> $4.99/season</li>
-                            <li><strong>Commander Skins:</strong> $1-5</li>
+                            <li><strong>Battle Pass:</strong></li>
+                            <li><strong>Commander Skins</strong></li>
                             <li><strong>Boosts & Premium Maps</strong></li>
                         </ul>
                         <div class="revenue-target">
@@ -2058,20 +2111,19 @@
                         <h3>Monetization</h3>
                         <ul class="feature-list">
                             <li><strong>Pay-per-play:</strong> Robux per game</li>
-                            <li><strong>Standalone:</strong> direct revenue</li>
-                            <li><strong>Distribution:</strong> partner gamepass split</li>
+                            <li><strong>Our virtual arcade game:</strong> direct revenue</li>
+                            <li><strong>Cabinet distribution:</strong> cut of revenue from product sales in partnered games.</li>
                         </ul>
                     </div>
                     <div class="content-block">
                         <h3>Why Developers Want This</h3>
                         <ul class="feature-list">
                             <li><strong>Passive revenue</strong> from cabinet usage</li>
-                            <li><strong>Engagement boost</strong> from minigames</li>
+                            <li>Instant <strong>engagement boost</strong> from adding our cabinets</li>
                             <li><strong>Zero dev cost:</strong> drag and drop</li>
-                            <li><strong>Global leaderboards</strong></li>
                         </ul>
                         <div class="revenue-target">
-                            <p class="label">Target: 50 Partner Games</p>
+                            <p class="label">Target: 50 Partner Games; 1000 CCU</p>
                             <div class="amount">$5K/mo</div>
                         </div>
                     </div>
@@ -2107,13 +2159,13 @@
                         <h3>Revenue Streams</h3>
                         <ul class="feature-list">
                             <li><strong>Cover charges</strong></li>
-                            <li><strong>VIP tables:</strong></li>
+                            <li><strong>VIP tables</strong></li>
                             <li><strong>Cosmetics & Brand activations</strong></li>
                             <li><strong>Artist partnerships</strong></li>
                             <li><strong>Arcade cabinets</strong></li>
                         </ul>
                         <div class="revenue-target">
-                            <p class="label">Target: 2 Events/Week</p>
+                            <p class="label">Target: 1 Activation per Month; 1000 CCU</p>
                             <div class="amount">$6K/mo</div>
                         </div>
                     </div>
@@ -2220,11 +2272,11 @@
                         <td>Month 8</td>
                     </tr>
                     <tr>
-                        <td>9-10</td>
+                        <td>8-9</td>
                         <td>Club Phoenix</td>
                         <td style="color: var(--gold);">$10,000</td>
                         <td>2 months</td>
-                        <td>Month 11</td>
+                        <td>Month 10</td>
                         <td>Month 12</td>
                     </tr>
                 </table>
@@ -2501,6 +2553,27 @@
         </div>
     </section>
 
+    <!-- SEE OUR PROJECTS -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2>SEE OUR PROJECTS</h2>
+            <div class="projects-grid stagger-children">
+                <div class="project-card">
+                    <a href="https://www.roblox.com/games/15149402333/Borders-RTS">Borders</a>
+                    <p class="project-meta">Live RTS built on fast tactical conquest.</p>
+                </div>
+                <div class="project-card">
+                    <a href="https://www.roblox.com/games/115976412437397/Club-Phoenix">Club Phoenix</a>
+                    <p class="project-meta">18+ social nightlife experience and live events.</p>
+                </div>
+                <div class="project-card">
+                    <a href="https://www.roblox.com/games/7029243758/Pirates-vs-Ninjas">Past Project: Pirates vs Ninjas</a>
+                    <p class="project-meta">Our earlier co-developed multiplayer first-person shooter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Navigation
         const sections = document.querySelectorAll('section');
@@ -2512,6 +2585,7 @@
             'elevator': 'Pitch',
             'thesis': 'Thesis',
             'products': 'Products',
+            'projects': 'See Our Projects',
             'market': 'Market',
             'timeline': 'Timeline',
             'borders': 'Borders',
