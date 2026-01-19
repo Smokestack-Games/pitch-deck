@@ -6,7 +6,7 @@
     <title>Smokestack Games | Pitch Deck Q1 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --black: #0a0a0a;
@@ -34,14 +34,36 @@
             --orange: #FB923C;
 
             --font-display: 'Bebas Neue', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            --font-body: 'Outfit', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+
+            /* Animation timing */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--rust-light), var(--gold-dim));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--rust), var(--gold));
         }
 
         html {
@@ -54,8 +76,84 @@
             background: var(--black);
             color: var(--white);
             line-height: 1.75;
-            font-size: 18px;
+            font-size: 23px;
             overflow-x: hidden;
+        }
+
+        /* Grain texture overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: overlay;
+        }
+
+        /* Scroll-triggered animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-back);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Staggered children animation */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.08s; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.16s; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.24s; }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.32s; }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.4s; }
+
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Brick/Industrial pattern */
@@ -103,18 +201,23 @@
             background: var(--dark-4);
             border: none;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s var(--ease-out-expo);
             position: relative;
         }
 
         .nav-dot:hover {
             background: var(--gray);
-            transform: scale(1.4);
+            transform: scaleY(2.5) scaleX(1.2);
         }
 
         .nav-dot.active {
             background: var(--gold);
             box-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow);
+            transform: scaleY(2);
+        }
+
+        .nav-dot.active:hover {
+            transform: scaleY(2.5) scaleX(1.2);
         }
 
         .nav-dot::before {
@@ -147,13 +250,25 @@
             background: linear-gradient(90deg, var(--rust-light), var(--gold), var(--cream));
             z-index: 1001;
             transition: width 0.15s ease-out;
+            box-shadow: 0 0 20px var(--gold-glow), 0 2px 10px rgba(255, 232, 31, 0.3);
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--cream));
+            filter: blur(2px);
         }
 
         /* Sections */
         section {
             min-height: 100vh;
             scroll-snap-align: start;
-            padding: 80px 80px;
+            padding: 100px 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -167,7 +282,7 @@
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1600px;
             margin: 0 auto;
             width: 100%;
             position: relative;
@@ -190,6 +305,11 @@
             line-height: 0.95;
             font-weight: 400;
             margin-bottom: 48px;
+            transition: letter-spacing 0.5s var(--ease-out-expo);
+        }
+
+        h2:hover {
+            letter-spacing: 0.08em;
         }
 
         h3 {
@@ -230,6 +350,8 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--mint);
+            position: relative;
+            overflow: hidden;
         }
 
         .live-badge::before {
@@ -239,11 +361,28 @@
             background: var(--mint);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--mint);
+        }
+
+        .live-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 237, 196, 0.2), transparent);
+            animation: shimmer 3s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 237, 196, 0.4); }
-            50% { opacity: 0.6; box-shadow: 0 0 0 4px transparent; }
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--mint); }
+            50% { opacity: 0.5; box-shadow: 0 0 20px var(--mint), 0 0 30px var(--mint); }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
         }
 
         /* Industrial decorative elements */
@@ -303,14 +442,25 @@
         }
 
         .hero h1 {
-            animation: fadeInUp 0.8s ease 0.1s forwards;
+            animation: heroTitle 1.2s var(--ease-out-expo) 0.1s forwards;
             opacity: 0;
             text-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
 
+        @keyframes heroTitle {
+            0% { opacity: 0; transform: translateY(60px) scale(0.95); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        @keyframes goldGlow {
+            0% { text-shadow: 0 0 60px var(--gold-glow), 0 0 120px var(--gold-glow); }
+            100% { text-shadow: 0 0 80px rgba(255, 232, 31, 0.4), 0 0 160px rgba(255, 232, 31, 0.3); }
+        }
+
         .hero h1 .highlight {
             color: var(--gold);
-            text-shadow: 0 0 60px var(--gold-glow);
+            text-shadow: 0 0 60px var(--gold-glow), 0 0 120px var(--gold-glow);
+            animation: goldGlow 3s ease-in-out infinite alternate;
         }
 
         .hero-date {
@@ -370,7 +520,7 @@
         }
 
         .elevator-content {
-            max-width: 1000px;
+            max-width: 1300px;
             position: relative;
             z-index: 1;
         }
@@ -438,13 +588,28 @@
             border: 1px solid var(--dark-3);
             padding: 32px;
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.5s var(--ease-out-expo);
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .thesis-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 232, 31, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-out-expo);
         }
 
         .thesis-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--rust-light);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--gold-dim), inset 0 1px 0 rgba(255,232,31,0.1);
+            border-color: var(--rust-light);
+        }
+
+        .thesis-card:hover::after {
+            opacity: 1;
         }
 
         .thesis-card::before {
@@ -459,7 +624,7 @@
         }
 
         .thesis-card p {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
@@ -498,16 +663,23 @@
             border: 1px solid var(--dark-3);
             padding: 28px;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.5s var(--ease-out-expo);
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            z-index: 10;
         }
+
+        .product-card.borders:hover { border-color: var(--mint); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(74,237,196,0.15); }
+        .product-card.arcade:hover { border-color: var(--blue); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(125,211,252,0.15); }
+        .product-card.club:hover { border-color: var(--purple); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(192,132,252,0.15); }
+        .product-card.rbxsync:hover { border-color: var(--orange); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 40px rgba(251,146,60,0.15); }
 
         .product-card::before {
             content: '';
@@ -548,7 +720,7 @@
         }
 
         .product-card p {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--light-gray);
             line-height: 1.75;
             flex-grow: 1;
@@ -591,6 +763,8 @@
             border: 1px solid var(--dark-3);
             position: relative;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.5s var(--ease-out-expo);
+            overflow: hidden;
         }
 
         .stat-card::before {
@@ -601,6 +775,16 @@
             right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--rust-light), var(--gold));
+            transition: height 0.5s var(--ease-out-expo);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 60px var(--gold-glow);
+        }
+
+        .stat-card:hover::before {
+            height: 5px;
         }
 
         .stat-number {
@@ -608,7 +792,13 @@
             font-size: clamp(4rem, 10vw, 6rem);
             color: var(--gold);
             line-height: 1;
-            text-shadow: 0 0 40px var(--gold-glow);
+            text-shadow: 0 0 40px var(--gold-glow), 0 0 80px var(--gold-glow);
+            transition: transform 0.5s var(--ease-out-expo), text-shadow 0.5s ease;
+        }
+
+        .stat-card:hover .stat-number {
+            transform: scale(1.05);
+            text-shadow: 0 0 60px var(--gold-glow), 0 0 120px var(--gold-glow);
         }
 
         .stat-label {
@@ -623,7 +813,7 @@
             font-size: 1.15rem;
             font-weight: 500;
             color: var(--light-gray);
-            max-width: 800px;
+            max-width: 1040px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -735,7 +925,7 @@
         }
 
         .timeline-content p {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: rgba(255,255,255,0.8);
             line-height: 1.7;
         }
@@ -791,6 +981,12 @@
             background: var(--black);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             aspect-ratio: 16 / 9;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
 
         .video-container video {
@@ -818,6 +1014,13 @@
             opacity: 0.4;
             pointer-events: none;
             box-shadow: inset 0 0 20px rgba(98, 222, 170, 0.1);
+            transition: all 0.5s var(--ease-out-expo);
+            z-index: 2;
+        }
+
+        .video-container:hover .video-glow {
+            opacity: 0.8;
+            box-shadow: inset 0 0 40px rgba(98, 222, 170, 0.2), 0 0 30px rgba(98, 222, 170, 0.3);
         }
 
         .video-glow.blue {
@@ -851,14 +1054,14 @@
         .desc {
             color: var(--light-gray);
             margin-bottom: 16px;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             line-height: 1.6;
         }
 
         .note {
             color: var(--gray);
             margin-top: 16px;
-            font-size: 0.85rem;
+            font-size: 1rem;
         }
 
         .note strong {
@@ -867,7 +1070,7 @@
 
         .feature-list {
             list-style: none;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
         }
 
         .feature-list li {
@@ -909,7 +1112,7 @@
             padding: 16px 0;
             padding-left: 28px;
             position: relative;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--light-gray);
             border-bottom: 1px solid var(--dark-3);
             line-height: 1.7;
@@ -1007,7 +1210,7 @@
         }
 
         .milestone p {
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: var(--gray);
             line-height: 1.5;
         }
@@ -1171,7 +1374,7 @@
         }
 
         .team-card p {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
@@ -1272,7 +1475,7 @@
         }
 
         .win-card p {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
@@ -1374,7 +1577,7 @@
         }
 
         .ask-card p, .ask-card li {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: rgba(255,255,255,0.9);
             line-height: 1.8;
         }
@@ -1461,7 +1664,7 @@
         }
 
         .vision-card p {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--light-gray);
             line-height: 1.75;
         }
@@ -1530,7 +1733,7 @@
         }
 
         .step-card p {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--light-gray);
             line-height: 1.75;
         }
@@ -1649,7 +1852,7 @@
     <section class="thesis" id="thesis">
         <div class="container">
             <h2>OUR THESIS</h2>
-            <div class="thesis-grid">
+            <div class="thesis-grid stagger-children">
                 <div class="thesis-card" data-num="01">
                     <h4>You don't need a viral hit</h4>
                     <p>Games with 2-5K concurrent users generate $2-5K/month with strong retention loops. We focus on predictable, recurring revenue.</p>
@@ -1674,7 +1877,7 @@
     <section class="products" id="products">
         <div class="container">
             <h2>FOUR PRODUCTS</h2>
-            <div class="products-grid">
+            <div class="products-grid stagger-children">
                 <div class="product-card borders">
                     <span class="tag">Establish Revenue</span>
                     <h4>BORDERS RTS</h4>
@@ -1715,7 +1918,7 @@
     <section class="market" id="market">
         <div class="container">
             <h2>WHY ROBLOX, WHY NOW</h2>
-            <div class="stats-row">
+            <div class="stats-row stagger-children">
                 <div class="stat-card">
                     <div class="stat-number">380M</div>
                     <div class="stat-label">Monthly Active Users</div>
@@ -1737,7 +1940,7 @@
     <section class="timeline-section" id="timeline">
         <div class="container">
             <h2>12-MONTH ROADMAP</h2>
-            <div class="timeline">
+            <div class="timeline stagger-children">
                 <div class="timeline-item active">
                     <div class="timeline-date">Month 1 <span class="now">NOW</span></div>
                     <div class="timeline-content">
@@ -1788,7 +1991,7 @@
     <section class="deep-dive borders" id="borders">
         <div class="container">
             <h2>BORDERS RTS <span class="live-badge">Live Alpha</span></h2>
-            <div class="media-showcase">
+            <div class="media-showcase reveal">
                 <div class="video-container">
                     <video loop muted playsinline preload="none">
                         <source src="bordersprogress2.mp4" type="video/mp4">
@@ -1835,7 +2038,7 @@
     <section class="deep-dive arcade alt" id="arcade">
         <div class="container">
             <h2>THE IRON ARCADE</h2>
-            <div class="media-showcase">
+            <div class="media-showcase reveal">
                 <div class="video-container">
                     <video loop muted playsinline preload="none">
                         <source src="arcade.mp4" type="video/mp4">
@@ -1875,7 +2078,7 @@
     <section class="deep-dive club" id="club">
         <div class="container">
             <h2>CLUB PHOENIX <span class="live-badge">Live Alpha</span></h2>
-            <div class="media-showcase">
+            <div class="media-showcase reveal">
                 <div class="video-container">
                     <video loop muted playsinline preload="none" controls>
                         <source src="club.mp4" type="video/mp4">
@@ -2398,6 +2601,19 @@
             video.muted = true;
             videoObserver.observe(video);
         });
+
+        // Scroll reveal animations
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
 
     </script>
 </body>
