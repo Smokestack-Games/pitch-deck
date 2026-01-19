@@ -1,0 +1,15 @@
+{
+  "name": "smokestack-pitch-deck",
+  "version": "1.0.0",
+  "description": "Smokestack Games Pitch Deck - VitePress with Parallax",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.27"
+  }
+}
