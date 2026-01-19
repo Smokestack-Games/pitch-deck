@@ -48,14 +48,12 @@ export function useParallax(
 
   // Parallax transform for background elements (moves slower)
   const backgroundTransform = computed(() => {
-    const offset = distanceFromCenter.value * speed * 0.5
-    return `translateY(${offset}px)`
+    return `translateY(0px)`
   })
 
   // Parallax transform for foreground content (moves at different rate)
   const contentTransform = computed(() => {
-    const offset = distanceFromCenter.value * speed * -0.2
-    return `translateY(${offset}px)`
+    return `translateY(0px)`
   })
 
   // Opacity based on distance from viewport center
