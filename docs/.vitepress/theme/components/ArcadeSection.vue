@@ -24,31 +24,38 @@ const { contentStyle, backgroundTransform } = useParallax(
     <div class="deep-dive-bg" :style="{ transform: backgroundTransform }"></div>
     <div class="container parallax-content" :style="contentStyle">
       <h2>THE IRON ARCADE</h2>
-      <div class="deep-dive-compact">
-        <video class="section-video" autoplay loop muted playsinline>
-          <source src="/arcade.mp4" type="video/mp4">
-        </video>
-        <div>
-          <h3>Two Products in One</h3>
-          <p class="desc">Standalone arcade game plus embeddable cabinets for other Roblox developers to distribute.</p>
-          <h3>Monetization</h3>
-          <ul class="feature-list">
-            <li><strong>Pay-per-play:</strong> Robux per game</li>
-            <li><strong>Standalone:</strong> direct revenue</li>
-            <li><strong>Distribution:</strong> partner gamepass split</li>
-          </ul>
+
+      <div class="media-showcase">
+        <div class="video-container">
+          <video autoplay loop muted playsinline>
+            <source src="/arcade.mp4" type="video/mp4">
+          </video>
+          <div class="video-glow"></div>
         </div>
-        <div>
-          <h3>Why Developers Want This</h3>
-          <ul class="feature-list">
-            <li><strong>Passive revenue</strong> from cabinet usage</li>
-            <li><strong>Engagement boost</strong> from minigames</li>
-            <li><strong>Zero dev cost:</strong> drag and drop</li>
-            <li><strong>Global leaderboards</strong></li>
-          </ul>
-          <div class="revenue-target">
-            <p class="label">Target: 50 Partner Games</p>
-            <div class="amount">$5K/mo</div>
+
+        <div class="content-grid">
+          <div class="content-block">
+            <h3>Two Products in One</h3>
+            <p class="desc">Standalone arcade game plus embeddable cabinets for other Roblox developers to distribute.</p>
+            <h3>Monetization</h3>
+            <ul class="feature-list">
+              <li><strong>Pay-per-play:</strong> Robux per game</li>
+              <li><strong>Standalone:</strong> direct revenue</li>
+              <li><strong>Distribution:</strong> partner gamepass split</li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <h3>Why Developers Want This</h3>
+            <ul class="feature-list">
+              <li><strong>Passive revenue</strong> from cabinet usage</li>
+              <li><strong>Engagement boost</strong> from minigames</li>
+              <li><strong>Zero dev cost:</strong> drag and drop</li>
+              <li><strong>Global leaderboards</strong></li>
+            </ul>
+            <div class="revenue-target">
+              <p class="label">Target: 50 Partner Games</p>
+              <div class="amount">$5K/mo</div>
+            </div>
           </div>
         </div>
       </div>
@@ -78,42 +85,72 @@ const { contentStyle, backgroundTransform } = useParallax(
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
-.deep-dive-compact {
+.media-showcase {
   display: grid;
-  grid-template-columns: 280px 1fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
   align-items: start;
 }
 
 @media (max-width: 1024px) {
-  .deep-dive-compact {
+  .media-showcase {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 }
 
-.section-video {
+.video-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--dark-1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.video-container video {
   width: 100%;
-  height: 158px;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid var(--dark-3);
 }
 
-@media (max-width: 1024px) {
-  .section-video {
-    max-width: 400px;
-    height: auto;
-    aspect-ratio: 16/9;
-  }
+.video-glow {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--blue);
+  border-radius: 8px;
+  opacity: 0.4;
+  pointer-events: none;
+  box-shadow: inset 0 0 20px rgba(100, 180, 255, 0.1);
+}
+
+.content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.content-block h3 {
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.content-block h3:not(:first-child) {
+  margin-top: 20px;
 }
 
 .desc {
   color: var(--light-gray);
   margin-bottom: 16px;
   font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .feature-list {
@@ -144,17 +181,20 @@ const { contentStyle, backgroundTransform } = useParallax(
   background: var(--dark-2);
   border: 1px solid var(--dark-3);
   padding: 24px;
-  margin-top: 16px;
+  margin-top: 20px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  border-left: 3px solid var(--blue);
 }
 
 .revenue-target .label {
   margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--gray);
 }
 
 .revenue-target .amount {
   font-family: var(--font-display);
-  font-size: 3rem;
+  font-size: 2.5rem;
   letter-spacing: 0.02em;
   color: var(--blue);
 }
