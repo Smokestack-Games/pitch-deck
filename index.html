@@ -742,6 +742,7 @@
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .deep-dive.borders h2 { color: var(--mint); }
@@ -860,15 +861,20 @@
         }
 
         .milestone h5 {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .milestone p {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: var(--gray);
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+
+        /* Compact milestone variant */
+        .milestones-grid .milestone {
+            padding: 12px 16px;
         }
 
         /* ==================== BUDGET ==================== */
@@ -1420,16 +1426,39 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            gap: 12px;
-            margin: 24px 0;
+            gap: 8px;
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .video-placeholder::before {
             content: '▶';
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--gold);
+        }
+
+        /* Compact deep-dive layout with video */
+        .deep-dive-compact {
+            display: grid;
+            grid-template-columns: 280px 1fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .deep-dive-compact .video-placeholder {
+            height: 158px;
+            aspect-ratio: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .deep-dive-compact {
+                grid-template-columns: 1fr;
+            }
+            .deep-dive-compact .video-placeholder {
+                max-width: 400px;
+                height: auto;
+                aspect-ratio: 16/9;
+            }
         }
 
         .image-placeholder {
@@ -1624,62 +1653,40 @@
     <section class="deep-dive borders" id="borders">
         <div class="container">
             <h2>BORDERS RTS <span class="live-badge">Live Alpha</span></h2>
-            <div class="video-placeholder" style="max-width: 600px;">
-                <span>Borders RTS Gameplay Video</span>
-            </div>
-            <div class="two-col">
+            <div class="deep-dive-compact">
+                <div class="video-placeholder">
+                    <span>Gameplay Video</span>
+                </div>
                 <div>
                     <h3>What It Is</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">A pixel-based real-time strategy game where players control nations, expand territory, and compete for map dominance. Features adaptive pan/zoom camera, mobile-first touch controls, and session-based competitive matches.</p>
-                    <h3>Current Status</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">Live alpha available for playtesting. We are planning a full rewrite using our custom RbxSync stack to improve architecture and prepare for monetization.</p>
+                    <p style="color: var(--light-gray); margin-bottom: 16px; font-size: 0.95rem;">Pixel-based RTS where players control nations, expand territory, and compete for map dominance. Mobile-first with adaptive camera.</p>
                     <h3>Why It Works</h3>
-                    <ul>
-                        <li><strong>RTS is underserved on Roblox</strong> with high demand and few quality options</li>
-                        <li><strong>Session-based matches</strong> drive high replay rate</li>
+                    <ul style="font-size: 0.95rem;">
+                        <li><strong>RTS underserved on Roblox</strong> with high demand</li>
+                        <li><strong>Session-based</strong> drives replay rate</li>
                         <li><strong>Competitive ladder</strong> drives retention</li>
-                        <li><strong>Full rewrite with RbxSync + Claude</strong> enables rapid iteration</li>
                     </ul>
                 </div>
                 <div>
                     <h3>Monetization</h3>
-                    <ul>
-                        <li><strong>Battle Pass:</strong> seasonal cosmetics and perks ($4.99)</li>
-                        <li><strong>Commander Skins:</strong> unit customization ($1-5)</li>
-                        <li><strong>Boosts:</strong> XP accelerators, cosmetic rewards</li>
-                        <li><strong>Premium Maps:</strong> exclusive competitive arenas</li>
+                    <ul style="font-size: 0.95rem;">
+                        <li><strong>Battle Pass:</strong> $4.99/season</li>
+                        <li><strong>Commander Skins:</strong> $1-5</li>
+                        <li><strong>Boosts & Premium Maps</strong></li>
                     </ul>
-                    <div class="revenue-target">
+                    <div class="revenue-target" style="margin-top: 16px;">
                         <p class="label">Target: 2,500 CCU</p>
                         <div class="amount">$2.5K/mo</div>
                     </div>
                 </div>
             </div>
-            <div class="milestones-grid" style="margin-top: 48px;">
-                <div class="milestone live">
-                    <h5>Alpha Live</h5>
-                    <p>Playable prototype for testing</p>
-                </div>
-                <div class="milestone">
-                    <h5>Architecture Rewrite</h5>
-                    <p>Rebuild with RbxSync stack</p>
-                </div>
-                <div class="milestone">
-                    <h5>Core Systems</h5>
-                    <p>Territory, nations, combat</p>
-                </div>
-                <div class="milestone">
-                    <h5>Mobile Optimization</h5>
-                    <p>Touch controls, performance</p>
-                </div>
-                <div class="milestone">
-                    <h5>Monetization</h5>
-                    <p>Battle pass, cosmetics</p>
-                </div>
-                <div class="milestone">
-                    <h5>Full Launch</h5>
-                    <p>Marketing, Season 1</p>
-                </div>
+            <div class="milestones-grid" style="margin-top: 32px;">
+                <div class="milestone live"><h5>Alpha Live</h5></div>
+                <div class="milestone"><h5>Rewrite</h5></div>
+                <div class="milestone"><h5>Core Systems</h5></div>
+                <div class="milestone"><h5>Mobile</h5></div>
+                <div class="milestone"><h5>Monetization</h5></div>
+                <div class="milestone"><h5>Launch</h5></div>
             </div>
         </div>
     </section>
@@ -1688,30 +1695,29 @@
     <section class="deep-dive arcade alt" id="arcade">
         <div class="container">
             <h2>THE IRON ARCADE</h2>
-            <div class="video-placeholder" style="max-width: 600px;">
-                <span>Iron Arcade Prototype Video</span>
-            </div>
-            <div class="two-col">
+            <div class="deep-dive-compact">
+                <div class="video-placeholder">
+                    <span>Prototype Video</span>
+                </div>
                 <div>
                     <h3>Two Products in One</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">A standalone arcade game with classic cabinet experiences, plus embeddable cabinets that other Roblox developers can distribute in their games.</p>
-                    <h3>Monetization Model</h3>
-                    <ul>
-                        <li><strong>Pay-per-play:</strong> each game costs Robux to play</li>
-                        <li><strong>Standalone revenue:</strong> direct income from our arcade game</li>
-                        <li><strong>Distribution revenue:</strong> partner games sell our gamepass developer product, we split proceeds</li>
-                        <li><strong>Partner incentive:</strong> game owners earn a cut for hosting our cabinets</li>
+                    <p style="color: var(--light-gray); margin-bottom: 16px; font-size: 0.95rem;">Standalone arcade game plus embeddable cabinets for other Roblox developers to distribute.</p>
+                    <h3>Monetization</h3>
+                    <ul style="font-size: 0.95rem;">
+                        <li><strong>Pay-per-play:</strong> Robux per game</li>
+                        <li><strong>Standalone:</strong> direct revenue</li>
+                        <li><strong>Distribution:</strong> partner gamepass split</li>
                     </ul>
                 </div>
                 <div>
                     <h3>Why Developers Want This</h3>
-                    <ul>
-                        <li><strong>Passive revenue:</strong> earn from players using cabinets in their game</li>
-                        <li><strong>Engagement boost:</strong> players stick around for minigames</li>
-                        <li><strong>Zero development cost:</strong> drag and drop integration</li>
-                        <li><strong>Global leaderboards:</strong> drive competition and return visits</li>
+                    <ul style="font-size: 0.95rem;">
+                        <li><strong>Passive revenue</strong> from cabinet usage</li>
+                        <li><strong>Engagement boost</strong> from minigames</li>
+                        <li><strong>Zero dev cost:</strong> drag and drop</li>
+                        <li><strong>Global leaderboards</strong></li>
                     </ul>
-                    <div class="revenue-target">
+                    <div class="revenue-target" style="margin-top: 16px;">
                         <p class="label">Target: 50 Partner Games</p>
                         <div class="amount">$5K/mo</div>
                     </div>
@@ -1724,34 +1730,32 @@
     <section class="deep-dive club" id="club">
         <div class="container">
             <h2>CLUB PHOENIX <span class="live-badge">Live Alpha</span></h2>
-            <div class="video-placeholder" style="max-width: 600px;">
-                <span>Club Phoenix Walkthrough Video</span>
-            </div>
-            <div class="two-col">
+            <div class="deep-dive-compact">
+                <div class="video-placeholder">
+                    <span>Walkthrough Video</span>
+                </div>
                 <div>
                     <h3>Product Overview</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">An 18+ verified venue with live DJ performances, arcade machines, and a virtual bar. Warehouse rave aesthetic with retro arcade elements.</p>
-                    <h3>Prior Experience</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">Our team built and operated <strong style="color: var(--white);">The Block</strong>, a Roblox nightclub. We learned what works, what doesn't, and what players actually want. Club Phoenix applies those lessons.</p>
+                    <p style="color: var(--light-gray); margin-bottom: 16px; font-size: 0.95rem;">18+ venue with live DJ performances, arcade machines, and virtual bar. Warehouse rave meets retro arcade.</p>
                     <h3>Why This Market</h3>
-                    <ul>
-                        <li><strong>Roblox's 17-24 demographic</strong> is the platform's fastest-growing segment</li>
-                        <li><strong>Virtual concerts proved demand:</strong> Lil Nas X drew 33M attendees</li>
-                        <li><strong>Brands seeking</strong> authentic Gen Z activation channels</li>
+                    <ul style="font-size: 0.95rem;">
+                        <li><strong>17-24 demo</strong> fastest-growing on Roblox</li>
+                        <li><strong>Virtual concerts:</strong> Lil Nas X 33M</li>
+                        <li><strong>Brands seeking</strong> Gen Z channels</li>
                     </ul>
+                    <p style="color: var(--gray); margin-top: 12px; font-size: 0.85rem;">Prior experience: Built and operated <strong style="color: var(--white);">The Block</strong></p>
                 </div>
                 <div>
                     <h3>Revenue Streams</h3>
-                    <ul>
-                        <li><strong>Cover charges:</strong> premium events ($2-5)</li>
-                        <li><strong>VIP tables:</strong> exclusive perks ($10-25)</li>
-                        <li><strong>Cosmetics:</strong> club gear, avatar items</li>
-                        <li><strong>Brand activations:</strong> sponsored nights</li>
-                        <li><strong>Artist partnerships:</strong> revenue share on tickets</li>
-                        <li><strong>Arcade cabinets:</strong> integrated Iron Arcade machines</li>
+                    <ul style="font-size: 0.95rem;">
+                        <li><strong>Cover charges:</strong> $2-5</li>
+                        <li><strong>VIP tables:</strong> $10-25</li>
+                        <li><strong>Cosmetics & Brand activations</strong></li>
+                        <li><strong>Artist partnerships</strong></li>
+                        <li><strong>Arcade cabinets</strong></li>
                     </ul>
-                    <div class="revenue-target">
-                        <p class="label">Target: 2 Events/Week, 500 Avg</p>
+                    <div class="revenue-target" style="margin-top: 16px;">
+                        <p class="label">Target: 2 Events/Week</p>
                         <div class="amount">$6K/mo</div>
                     </div>
                 </div>
