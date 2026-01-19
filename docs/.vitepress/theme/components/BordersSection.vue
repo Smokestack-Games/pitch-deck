@@ -34,9 +34,9 @@ const milestones = [
     <div class="container parallax-content" :style="contentStyle">
       <h2>BORDERS RTS <span class="live-badge">Live Alpha</span></h2>
       <div class="deep-dive-compact">
-        <div class="video-placeholder">
-          <span>Gameplay Video</span>
-        </div>
+        <video class="section-video" autoplay loop muted playsinline>
+          <source src="/bordersprogress2.mp4" type="video/mp4">
+        </video>
         <div>
           <h3>What It Is</h3>
           <p class="desc">Pixel-based RTS where players control nations, expand territory, and compete for map dominance. Mobile-first with adaptive camera.</p>
@@ -112,28 +112,16 @@ const milestones = [
   }
 }
 
-.video-placeholder {
-  background: var(--dark-3);
-  border: 2px dashed var(--dark-4);
-  border-radius: 4px;
+.section-video {
+  width: 100%;
   height: 158px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 8px;
-  color: var(--gray);
-  font-size: 0.8rem;
-}
-
-.video-placeholder::before {
-  content: '\25B6';
-  font-size: 1.5rem;
-  color: var(--gold);
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--dark-3);
 }
 
 @media (max-width: 1024px) {
-  .video-placeholder {
+  .section-video {
     max-width: 400px;
     height: auto;
     aspect-ratio: 16/9;

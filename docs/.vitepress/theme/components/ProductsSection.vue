@@ -21,7 +21,7 @@ const { contentStyle, backgroundTransform } = useParallax(
 const products = [
   {
     type: 'borders',
-    tag: 'Prove Revenue',
+    tag: 'Establish Revenue',
     name: 'BORDERS RTS',
     desc: 'Real-time territory control strategy game. Pixel-based map conquest with nations, troops, and tactical expansion. Mobile-first.',
     status: 'live',
@@ -31,13 +31,13 @@ const products = [
     type: 'arcade',
     tag: 'Platform Distribution',
     name: 'THE IRON ARCADE',
-    desc: 'Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. Partner games sell our gamepass developer product and share revenue.',
+    desc: 'Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. Partner games sell our developer product and share revenue.',
     status: 'planned',
     statusText: 'Planned'
   },
   {
     type: 'club',
-    tag: 'Prove Culture',
+    tag: 'Brand Partnerships',
     name: 'CLUB PHOENIX',
     desc: '18+ virtual nightclub with live DJ performances, arcade games, and brand activations. Built on our experience running The Block.',
     status: 'live',

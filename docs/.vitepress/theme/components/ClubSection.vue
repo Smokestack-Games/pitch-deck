@@ -25,8 +25,14 @@ const { contentStyle, backgroundTransform } = useParallax(
     <div class="container parallax-content" :style="contentStyle">
       <h2>CLUB PHOENIX <span class="live-badge">Live Alpha</span></h2>
       <div class="deep-dive-compact">
-        <div class="video-placeholder">
-          <span>Walkthrough Video</span>
+        <div class="youtube-embed">
+          <iframe
+            src="https://www.youtube.com/embed/mby9IZ0klSs"
+            title="Club Phoenix Walkthrough"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
         <div>
           <h3>Product Overview</h3>
@@ -96,28 +102,21 @@ const { contentStyle, backgroundTransform } = useParallax(
   }
 }
 
-.video-placeholder {
-  background: var(--dark-3);
-  border: 2px dashed var(--dark-4);
-  border-radius: 4px;
+.youtube-embed {
+  width: 100%;
   height: 158px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 8px;
-  color: var(--gray);
-  font-size: 0.8rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--dark-3);
 }
 
-.video-placeholder::before {
-  content: '\25B6';
-  font-size: 1.5rem;
-  color: var(--gold);
+.youtube-embed iframe {
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 1024px) {
-  .video-placeholder {
+  .youtube-embed {
     max-width: 400px;
     height: auto;
     aspect-ratio: 16/9;

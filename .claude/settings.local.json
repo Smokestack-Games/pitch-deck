@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e \"const {execSync} = require\\(''child_process''\\); try { console.log\\(execSync\\(''npx vitepress build docs'', {cwd: process.cwd\\(\\), encoding: ''utf8'', timeout: 120000}\\)\\); } catch\\(e\\) { console.log\\(''stdout:'', e.stdout\\); console.log\\(''stderr:'', e.stderr\\); process.exit\\(1\\); }\")"
+      "Bash(node -e \"const {execSync} = require\\(''child_process''\\); try { console.log\\(execSync\\(''npx vitepress build docs'', {cwd: process.cwd\\(\\), encoding: ''utf8'', timeout: 120000}\\)\\); } catch\\(e\\) { console.log\\(''stdout:'', e.stdout\\); console.log\\(''stderr:'', e.stderr\\); process.exit\\(1\\); }\")",
+      "Skill(frontend-design)"
     ]
   }
 }

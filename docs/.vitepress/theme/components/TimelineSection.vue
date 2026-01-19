@@ -19,11 +19,12 @@ const { contentStyle, backgroundTransform } = useParallax(
 )
 
 const timelineItems = [
-  { date: 'Month 1-3', now: true, title: 'Borders RTS Development', desc: 'Alpha live. Full rewrite with RbxSync stack, monetization implementation, launch preparation.' },
-  { date: 'Month 4-5', now: false, title: 'Arcade Development', desc: 'Build standalone arcade game and cabinet engine for distribution.' },
-  { date: 'Month 6-8', now: false, title: 'Iron Arcade Launch', desc: 'Launch standalone game, release distributable cabinets, onboard partner games.' },
-  { date: 'Month 9', now: false, title: 'Club Phoenix Production', desc: 'Alpha live. Final production: lighting, sound, VIP areas, artist booking.' },
-  { date: 'Month 10-12', now: false, title: 'Club Launch + Growth', desc: 'Grand opening, brand partnerships, sustainable revenue.' }
+  { date: 'Month 1', now: true, roiStart: false, title: 'Borders RTS Core Development', desc: 'Alpha is live. Full rewrite with RbxSync stack, monetization implementation, and launch preparation.' },
+  { date: 'Month 2-3', now: false, roiStart: true, title: 'Borders RTS LiveOps', desc: 'Ongoing game updates and monetization improvements to grow audience and revenue.' },
+  { date: 'Month 4-5', now: false, roiStart: false, title: 'Arcade Development', desc: 'Build standalone arcade game and cabinet engine for distribution.' },
+  { date: 'Month 6-8', now: false, roiStart: false, title: 'Iron Arcade Launch', desc: 'Launch standalone game, release distributable cabinets, onboard partner games.' },
+  { date: 'Month 9', now: false, roiStart: false, title: 'Club Phoenix Production', desc: 'Alpha live. Final production: lighting, sound, VIP areas, artist booking.' },
+  { date: 'Month 10-12', now: false, roiStart: false, title: 'Club Launch + Growth', desc: 'Grand opening, brand partnerships, sustainable revenue.' }
 ]
 </script>
 
@@ -37,7 +38,7 @@ const timelineItems = [
           v-for="(item, index) in timelineItems"
           :key="index"
           class="timeline-item"
-          :class="{ active: item.now }"
+          :class="{ active: item.now, 'roi-highlight': item.roiStart }"
         >
           <div class="timeline-date">
             {{ item.date }}
@@ -119,6 +120,27 @@ const timelineItems = [
   font-size: 0.8rem;
   font-weight: 700;
   margin-left: 8px;
+}
+
+.timeline-item.roi-highlight {
+  background: linear-gradient(90deg, rgba(255, 232, 31, 0.08) 0%, rgba(255, 232, 31, 0.02) 100%);
+  border-left: 3px solid var(--gold);
+  margin-left: -16px;
+  padding-left: 16px;
+  border-bottom-color: rgba(255, 232, 31, 0.2);
+}
+
+.timeline-item.roi-highlight .timeline-content h4::after {
+  content: 'ROI START';
+  margin-left: 12px;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  background: rgba(255, 232, 31, 0.15);
+  padding: 3px 8px;
+  vertical-align: middle;
 }
 
 .timeline-content h4 {
