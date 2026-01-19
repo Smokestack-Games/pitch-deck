@@ -1325,7 +1325,7 @@
         .step-number {
             font-family: var(--font-display);
             font-size: 4rem;
-            color: var(--rust);
+            color: var(--gold);
             margin-bottom: 16px;
             letter-spacing: 0.02em;
         }
@@ -1418,6 +1418,50 @@
             opacity: 0.8;
         }
 
+        /* Video/Image Placeholders */
+        .video-placeholder {
+            background: var(--dark-3);
+            border: 2px dashed var(--dark-4);
+            border-radius: 4px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            margin: 24px 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .video-placeholder::before {
+            content: '▶';
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .image-placeholder {
+            background: var(--dark-3);
+            border: 2px dashed var(--dark-4);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .image-placeholder.avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
+
+        .image-placeholder.logo {
+            width: 100px;
+            height: 40px;
+        }
+
         /* Utility */
         .text-gold { color: var(--gold); }
         .text-rust { color: var(--rust); }
@@ -1493,7 +1537,7 @@
                 <div class="product-card arcade">
                     <span class="tag">Platform Distribution</span>
                     <h4>THE IRON ARCADE</h4>
-                    <p>Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. We share revenue with partner games that distribute our cabinets.</p>
+                    <p>Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. Partner games sell our gamepass developer product and share revenue.</p>
                     <div class="status">
                         <span class="label">Planned</span>
                     </div>
@@ -1588,6 +1632,9 @@
     <section class="deep-dive borders" id="borders">
         <div class="container">
             <h2>BORDERS RTS <span class="live-badge">Live Alpha</span></h2>
+            <div class="video-placeholder" style="max-width: 600px;">
+                <span>Borders RTS Gameplay Video</span>
+            </div>
             <div class="two-col">
                 <div>
                     <h3>What It Is</h3>
@@ -1649,6 +1696,9 @@
     <section class="deep-dive arcade alt" id="arcade">
         <div class="container">
             <h2>THE IRON ARCADE</h2>
+            <div class="video-placeholder" style="max-width: 600px;">
+                <span>Iron Arcade Prototype Video</span>
+            </div>
             <div class="two-col">
                 <div>
                     <h3>Two Products in One</h3>
@@ -1657,7 +1707,7 @@
                     <ul>
                         <li><strong>Pay-per-play:</strong> each game costs Robux to play</li>
                         <li><strong>Standalone revenue:</strong> direct income from our arcade game</li>
-                        <li><strong>Distribution revenue:</strong> partner games sell our gamepass, we split proceeds</li>
+                        <li><strong>Distribution revenue:</strong> partner games sell our gamepass developer product, we split proceeds</li>
                         <li><strong>Partner incentive:</strong> game owners earn a cut for hosting our cabinets</li>
                     </ul>
                 </div>
@@ -1671,7 +1721,7 @@
                     </ul>
                     <div class="revenue-target">
                         <p class="label">Target: 50 Partner Games</p>
-                        <div class="amount">$8K/mo</div>
+                        <div class="amount">$5K/mo</div>
                     </div>
                 </div>
             </div>
@@ -1682,18 +1732,20 @@
     <section class="deep-dive club" id="club">
         <div class="container">
             <h2>CLUB PHOENIX <span class="live-badge">Live Alpha</span></h2>
+            <div class="video-placeholder" style="max-width: 600px;">
+                <span>Club Phoenix Walkthrough Video</span>
+            </div>
             <div class="two-col">
                 <div>
-                    <h3>Virtual Nightlife, Real Revenue</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">An 18+ verified venue with live DJ performances, arcade machines, and a virtual bar. The vibe is warehouse rave meets retro arcade.</p>
-                    <h3>We've Done This Before</h3>
+                    <h3>Product Overview</h3>
+                    <p style="color: var(--light-gray); margin-bottom: 24px;">An 18+ verified venue with live DJ performances, arcade machines, and a virtual bar. Warehouse rave aesthetic with retro arcade elements.</p>
+                    <h3>Prior Experience</h3>
                     <p style="color: var(--light-gray); margin-bottom: 24px;">Our team built and operated <strong style="color: var(--white);">The Block</strong>, a Roblox nightclub. We learned what works, what doesn't, and what players actually want. Club Phoenix applies those lessons.</p>
                     <h3>Why This Market</h3>
                     <ul>
                         <li><strong>Roblox's 17-24 demographic</strong> is the platform's fastest-growing segment</li>
                         <li><strong>Virtual concerts proved demand:</strong> Lil Nas X drew 33M attendees</li>
                         <li><strong>Brands seeking</strong> authentic Gen Z activation channels</li>
-                        <li><strong>Our arcade cabinets</strong> provide unique engagement hook</li>
                     </ul>
                 </div>
                 <div>
@@ -1704,6 +1756,7 @@
                         <li><strong>Cosmetics:</strong> club gear, avatar items</li>
                         <li><strong>Brand activations:</strong> sponsored nights</li>
                         <li><strong>Artist partnerships:</strong> revenue share on tickets</li>
+                        <li><strong>Arcade cabinets:</strong> integrated Iron Arcade machines</li>
                     </ul>
                     <div class="revenue-target">
                         <p class="label">Target: 2 Events/Week, 500 Avg</p>
@@ -1761,11 +1814,15 @@
                         </tr>
                         <tr>
                             <td>The Iron Arcade (future)</td>
-                            <td>TBD</td>
+                            <td>$10,000</td>
                         </tr>
                         <tr>
                             <td>Club Phoenix (future)</td>
-                            <td>TBD</td>
+                            <td>$10,000</td>
+                        </tr>
+                        <tr>
+                            <td>Total (all products)</td>
+                            <td>$25,000</td>
                         </tr>
                     </table>
                     <div class="budget-note" style="margin-top: 24px;">
@@ -1777,24 +1834,139 @@
         </div>
     </section>
 
+    <!-- REVENUE PROJECTION -->
+    <section class="deep-dive" id="projection">
+        <div class="container">
+            <h2>12-MONTH PROJECTION</h2>
+            <div style="overflow-x: auto;">
+                <table class="budget-table" style="width: 100%; min-width: 800px;">
+                    <tr>
+                        <th>Month</th>
+                        <th>Product</th>
+                        <th>Capital Request</th>
+                        <th>Dev Time</th>
+                        <th>Revenue Start</th>
+                        <th>Payback</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Borders RTS</td>
+                        <td style="color: var(--gold);">$5,000</td>
+                        <td>1 month</td>
+                        <td>Month 2</td>
+                        <td>Month 3</td>
+                    </tr>
+                    <tr>
+                        <td>4-5</td>
+                        <td>Iron Arcade</td>
+                        <td style="color: var(--gold);">$10,000</td>
+                        <td>2 months</td>
+                        <td>Month 6</td>
+                        <td>Month 8</td>
+                    </tr>
+                    <tr>
+                        <td>9-10</td>
+                        <td>Club Phoenix</td>
+                        <td style="color: var(--gold);">$10,000</td>
+                        <td>2 months</td>
+                        <td>Month 11</td>
+                        <td>Month 12</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-top: 48px;">
+                <h3>Monthly Revenue Targets (Post-Launch)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 24px;">
+                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--mint);">
+                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">Borders RTS</p>
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--mint);">$2,500/mo</p>
+                    </div>
+                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--blue);">
+                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">Iron Arcade</p>
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--blue);">$5,000/mo</p>
+                    </div>
+                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--purple);">
+                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">Club Phoenix</p>
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--purple);">$6,000/mo</p>
+                    </div>
+                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--orange);">
+                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">RbxSync</p>
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--orange);">$1,000/mo</p>
+                    </div>
+                </div>
+                <p style="margin-top: 32px; color: var(--light-gray); text-align: center;">
+                    <strong style="color: var(--gold);">Combined Target (Month 12+):</strong> $14,500/month
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- TEAM -->
     <section class="team" id="team">
         <div class="container">
             <h2>TEAM</h2>
             <div class="team-grid">
                 <div class="team-card">
-                    <div class="team-avatar">MC</div>
+                    <div class="image-placeholder avatar" style="margin-bottom: 24px;">Photo</div>
                     <h4>Marissa Cheves</h4>
                     <p class="role">Founder & Team Lead</p>
                     <p>5+ years building on Roblox. <span class="highlight">Built RbxSync from the ground up</span>, the same tool that powers our development and generates license revenue.</p>
                     <p style="margin-top: 12px;">Previously built and operated <span class="highlight">The Block</span>, a Roblox nightclub. Learnings from that project directly inform Club Phoenix.</p>
                 </div>
                 <div class="team-card">
-                    <div class="team-avatar" style="background: linear-gradient(135deg, var(--blue), var(--purple));">BM</div>
+                    <div class="image-placeholder avatar" style="margin-bottom: 24px;">Photo</div>
                     <h4>Benjamin Marsh</h4>
                     <p class="role">Developer</p>
                     <p>5+ years Roblox development. Multiple shipped titles. <span class="highlight">Systems specialist</span> in gameplay programming, networking, and data architecture.</p>
                     <p style="margin-top: 12px;">Proven track record delivering polished multiplayer experiences. Expert in Luau and Roblox's technical stack.</p>
+                </div>
+            </div>
+
+            <!-- Collaboration History -->
+            <div style="margin-top: 64px; text-align: center;">
+                <h3 style="margin-bottom: 32px;">COLLABORATION HISTORY</h3>
+                <p style="color: var(--light-gray); max-width: 800px; margin: 0 auto 32px; line-height: 1.8;">
+                    Worked together on <strong style="color: var(--white);">5+ projects</strong> across 2 teams.
+                    Built <strong style="color: var(--white);">Pirates vs. Ninjas</strong> from scratch together (Marissa on design, Ben on tech).
+                    Co-developed alpha versions of Borders RTS, Club Phoenix, and Iron Arcade internal prototypes.
+                </p>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div class="image-placeholder logo" style="margin: 0 auto 8px;">Logo</div>
+                        <p style="font-size: 0.85rem; color: var(--gray);">Supersocial (2021-2022)</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="image-placeholder logo" style="margin: 0 auto 8px;">Logo</div>
+                        <p style="font-size: 0.85rem; color: var(--gray);">Audioscape (2025-2026)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="deep-dive alt" id="tech-stack">
+        <div class="container">
+            <h2>OUR TECHNICAL ADVANTAGE</h2>
+            <p style="color: var(--light-gray); max-width: 800px; margin-bottom: 48px; font-size: 1.1rem; line-height: 1.8;">
+                We are a game company that built a tool to accelerate our development. Our internal tech stack enables a 2-person team to match the output of teams 3x our size.
+            </p>
+            <div class="win-grid">
+                <div class="win-card">
+                    <h4>RbxSync</h4>
+                    <p>End-to-end automated dev stack for Roblox games. Git version control, VS Code editing, bidirectional sync with Studio. Also generates license revenue ($60/license).</p>
+                </div>
+                <div class="win-card">
+                    <h4>Multi-Agent Architecture</h4>
+                    <p>AI agents via MCP handle routine tasks, code generation, and testing. Claude integration throughout the development workflow.</p>
+                </div>
+                <div class="win-card">
+                    <h4>Managed Organization</h4>
+                    <p>Structured project management with Linear integration, automated issue tracking, and coordinated multi-agent development sessions.</p>
+                </div>
+                <div class="win-card">
+                    <h4>Iteration Speed</h4>
+                    <p>2-3x faster development cycles compared to traditional Roblox workflows. Changes sync instantly between local files and Studio.</p>
                 </div>
             </div>
         </div>
@@ -1856,8 +2028,8 @@
                     <p>Our team built and operated The Block, a Roblox nightclub. We learned what works, what doesn't, and what players actually want. Club Phoenix applies those lessons.</p>
                 </div>
                 <div class="win-card">
-                    <h4>Tools Company That Makes Games</h4>
-                    <p>RbxSync powers our development and generates license revenue. This is how a 2-person team competes with studios of 5-6. We build games and infrastructure.</p>
+                    <h4>AI-Accelerated Production</h4>
+                    <p>We leverage AI tools with combined shared experience to accelerate traditional productions and match a quality bar of teams 3x our size. RbxSync powers our workflow and generates license revenue.</p>
                 </div>
             </div>
         </div>
@@ -1867,12 +2039,12 @@
     <section class="the-ask" id="ask">
         <div class="container">
             <div class="ask-amount">$5,000</div>
-            <p class="ask-subtitle">to accelerate Borders RTS from beta to full launch</p>
+            <p class="ask-subtitle">to accelerate Borders RTS from alpha to full launch</p>
             <div class="ask-grid">
                 <div class="ask-card">
                     <h4>What It Funds</h4>
                     <ul>
-                        <li>3 months of focused development</li>
+                        <li>1 month of development (2 months to payback)</li>
                         <li>Monetization implementation</li>
                         <li>Marketing push for launch</li>
                         <li>Creator partnerships</li>
@@ -1900,7 +2072,7 @@
                     <h4>Why This Is Low Risk</h4>
                     <ul>
                         <li>Products are already live, not speculative</li>
-                        <li>Team has shipped before (The Block, RbxSync)</li>
+                        <li>Team has shipped together (Pirates vs. Ninjas, The Block, RbxSync)</li>
                         <li>Principal-only repayment, no equity</li>
                         <li>Payback required before next funding request</li>
                     </ul>
@@ -1992,7 +2164,9 @@
             'arcade': 'Arcade',
             'club': 'Club',
             'budget': 'Budget',
+            'projection': 'Projection',
             'team': 'Team',
+            'tech-stack': 'Tech Stack',
             'why-win': 'Why Win',
             'ask': 'The Ask',
             'vision': 'Vision',
