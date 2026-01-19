@@ -76,7 +76,8 @@
             background: var(--black);
             color: var(--white);
             line-height: 1.75;
-            font-size: 23px;
+            /* Scale based on height, 90% of previous scale */
+            font-size: min(27px, 2.52vh);
             overflow-x: hidden;
         }
 
@@ -195,8 +196,8 @@
         }
 
         .nav-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 2px;
             background: var(--dark-4);
             border: none;
@@ -246,7 +247,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 3px;
+            height: 3.5px;
             background: linear-gradient(90deg, var(--rust-light), var(--gold), var(--cream));
             z-index: 1001;
             transition: width 0.15s ease-out;
@@ -267,8 +268,11 @@
         /* Sections */
         section {
             min-height: 100vh;
+            /* Prevent overflow on 16:9 screens */
+            max-height: 100vh;
             scroll-snap-align: start;
-            padding: 100px 100px;
+            /* Use vh for vertical padding to scale with height, 90% of previous scale */
+            padding: 10.8vh 5.4vw;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -277,12 +281,12 @@
         }
 
         @media (max-width: 768px) {
-            section { padding: 60px 24px; }
+            section { padding: 60px 24px; max-height: none; }
             .nav { display: none; }
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1872px;
             margin: 0 auto;
             width: 100%;
             position: relative;
@@ -292,7 +296,8 @@
         /* Typography */
         h1 {
             font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 12rem);
+            /* Include vh in clamp for height responsiveness, 90% of previous scale */
+            font-size: clamp(5.85rem, 13.5vh, 14.04rem);
             letter-spacing: 0.04em;
             line-height: 0.85;
             font-weight: 400;
@@ -300,7 +305,8 @@
 
         h2 {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            /* Include vh in clamp for height responsiveness, 90% of previous scale */
+            font-size: clamp(3.51rem, 9vh, 6.435rem);
             letter-spacing: 0.04em;
             line-height: 0.95;
             font-weight: 400;
@@ -314,7 +320,7 @@
 
         h3 {
             font-family: var(--font-body);
-            font-size: 1rem;
+            font-size: 1.17rem;
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -324,7 +330,7 @@
 
         .label {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.99rem;
             font-weight: 500;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -541,13 +547,13 @@
 
         .elevator-highlight {
             margin-top: 48px;
-            padding: 36px;
+            padding: 41.4px;
             background: rgba(0,0,0,0.08);
             border-left: 5px solid var(--rust);
         }
 
         .elevator-highlight p {
-            font-size: 1.25rem;
+            font-size: 1.458rem;
             font-weight: 500;
             margin-bottom: 12px;
             line-height: 1.7;
@@ -555,7 +561,7 @@
 
         .elevator-highlight .big {
             font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: 4.68rem;
             color: var(--rust);
             letter-spacing: 0.02em;
         }
@@ -579,14 +585,14 @@
         .thesis-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            gap: 27.9px;
             margin-top: 48px;
         }
 
         .thesis-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
+            padding: 37.8px;
             position: relative;
             transition: all 0.5s var(--ease-out-expo);
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -617,14 +623,14 @@
         }
 
         .thesis-card h4 {
-            font-size: 1.25rem;
+            font-size: 1.458rem;
             font-weight: 700;
             margin-bottom: 14px;
             color: var(--white);
         }
 
         .thesis-card p {
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
@@ -647,7 +653,7 @@
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 23.4px;
         }
 
         @media (max-width: 1100px) {
@@ -661,7 +667,7 @@
         .product-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 28px;
+            padding: 32.4px;
             position: relative;
             transition: all 0.5s var(--ease-out-expo);
             display: flex;
@@ -697,9 +703,9 @@
 
         .product-card .tag {
             display: inline-block;
-            padding: 6px 12px;
+            padding: 8px 16px;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.873rem;
             font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -714,13 +720,13 @@
 
         .product-card h4 {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 2.34rem;
             letter-spacing: 0.04em;
             margin-bottom: 14px;
         }
 
         .product-card p {
-            font-size: 1.1rem;
+            font-size: 1.287rem;
             color: var(--light-gray);
             line-height: 1.75;
             flex-grow: 1;
@@ -748,8 +754,8 @@
         .stats-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin: 48px 0;
+            gap: 37.8px;
+            margin: 55.8px 0;
         }
 
         @media (max-width: 768px) {
@@ -758,7 +764,7 @@
 
         .stat-card {
             text-align: center;
-            padding: 48px 24px;
+            padding: 55.8px 27.9px;
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
             position: relative;
@@ -789,7 +795,7 @@
 
         .stat-number {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 10vw, 6rem);
+            font-size: clamp(4.68rem, 11.7vw, 7.02rem);
             color: var(--gold);
             line-height: 1;
             text-shadow: 0 0 40px var(--gold-glow), 0 0 80px var(--gold-glow);
@@ -802,7 +808,7 @@
         }
 
         .stat-label {
-            font-size: 1.1rem;
+            font-size: 1.287rem;
             font-weight: 500;
             color: var(--light-gray);
             margin-top: 16px;
@@ -810,7 +816,7 @@
 
         .market-footer {
             text-align: center;
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             font-weight: 500;
             color: var(--light-gray);
             max-width: 1040px;
@@ -847,9 +853,9 @@
 
         .timeline-item {
             display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 40px;
-            padding: 32px 0;
+            grid-template-columns: 163.8px 1fr;
+            gap: 46.8px;
+            padding: 37.8px 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             position: relative;
         }
@@ -861,8 +867,8 @@
         .timeline-item.active::before {
             content: '';
             position: absolute;
-            left: 156px;
-            top: 40px;
+            left: 178px;
+            top: 45px;
             width: 12px;
             height: 12px;
             background: var(--gold);
@@ -882,7 +888,7 @@
 
         .timeline-date {
             font-family: var(--font-mono);
-            font-size: 1.05rem;
+            font-size: 1.224rem;
             font-weight: 600;
             color: var(--gold);
         }
@@ -919,13 +925,13 @@
         }
 
         .timeline-content h4 {
-            font-size: 1.25rem;
+            font-size: 1.458rem;
             font-weight: 700;
             margin-bottom: 10px;
         }
 
         .timeline-content p {
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             color: rgba(255,255,255,0.8);
             line-height: 1.7;
         }
@@ -963,7 +969,7 @@
         .media-showcase {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 46.8px;
             align-items: start;
         }
 
@@ -1036,11 +1042,11 @@
         .content-grid {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 27.9px;
         }
 
         .content-block h3 {
-            font-size: 1rem;
+            font-size: 1.17rem;
             color: var(--white);
             margin-bottom: 12px;
             text-transform: uppercase;
@@ -1054,7 +1060,7 @@
         .desc {
             color: var(--light-gray);
             margin-bottom: 16px;
-            font-size: 1.1rem;
+            font-size: 1.287rem;
             line-height: 1.6;
         }
 
@@ -1070,7 +1076,7 @@
 
         .feature-list {
             list-style: none;
-            font-size: 1.1rem;
+            font-size: 1.287rem;
         }
 
         .feature-list li {
@@ -1095,7 +1101,7 @@
         .two-col {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 64px;
+            gap: 74.7px;
             position: relative;
             z-index: 1;
         }
@@ -1109,10 +1115,10 @@
         }
 
         .two-col li {
-            padding: 16px 0;
+            padding: 18.9px 0;
             padding-left: 28px;
             position: relative;
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             color: var(--light-gray);
             border-bottom: 1px solid var(--dark-3);
             line-height: 1.7;
@@ -1137,7 +1143,7 @@
         .revenue-target {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 24px;
+            padding: 27.9px;
             margin-top: 24px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
@@ -1148,7 +1154,7 @@
 
         .revenue-target .amount {
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 3.51rem;
             letter-spacing: 0.02em;
         }
 
@@ -1160,7 +1166,7 @@
         .milestones-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
+            gap: 18.9px;
             margin-top: 32px;
             position: relative;
             z-index: 1;
@@ -1169,7 +1175,7 @@
         .milestone {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 20px;
+            padding: 23.4px;
             position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
@@ -1217,7 +1223,7 @@
 
         /* Compact milestone variant */
         .milestones-grid .milestone {
-            padding: 12px 16px;
+            padding: 14.4px 18.9px;
         }
 
         /* ==================== BUDGET ==================== */
@@ -1239,7 +1245,7 @@
         .budget-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            gap: 55.8px;
             margin-top: 48px;
             position: relative;
             z-index: 1;
@@ -1256,7 +1262,7 @@
 
         .budget-table th,
         .budget-table td {
-            padding: 18px 16px;
+            padding: 20.7px 18.9px;
             text-align: left;
             border-bottom: 1px solid var(--dark-3);
         }
@@ -1271,7 +1277,7 @@
         }
 
         .budget-table td {
-            font-size: 1.1rem;
+            font-size: 1.287rem;
             font-weight: 500;
         }
 
@@ -1289,8 +1295,8 @@
         .budget-note {
             background: rgba(255, 232, 31, 0.05);
             border: 1px solid rgba(255, 232, 31, 0.2);
-            padding: 28px;
-            font-size: 1.1rem;
+            padding: 32.4px;
+            font-size: 1.287rem;
             font-weight: 500;
             color: var(--light-gray);
             line-height: 1.7;
@@ -1318,7 +1324,7 @@
         .team-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
+            gap: 37.8px;
             max-width: 900px;
             margin: 48px auto 0;
             position: relative;
@@ -1332,7 +1338,7 @@
         .team-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 40px;
+            padding: 46.8px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
@@ -1358,7 +1364,7 @@
         }
 
         .team-card h4 {
-            font-size: 1.5rem;
+            font-size: 1.755rem;
             font-weight: 700;
             margin-bottom: 6px;
         }
@@ -1374,7 +1380,7 @@
         }
 
         .team-card p {
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
@@ -1535,7 +1541,7 @@
 
         .ask-amount {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 20vw, 14rem);
+            font-size: clamp(7.02rem, 23.4vw, 16.38rem);
             line-height: 1;
             color: var(--gold);
             text-shadow: 0 0 80px var(--gold-glow);
@@ -1544,7 +1550,7 @@
         }
 
         .ask-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.755rem;
             font-weight: 500;
             color: rgba(255,255,255,0.9);
             margin-bottom: 64px;
@@ -1553,7 +1559,7 @@
         .ask-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
+            gap: 27.9px;
             max-width: 900px;
             margin: 0 auto;
             text-align: left;
@@ -1566,7 +1572,7 @@
         .ask-card {
             background: rgba(0,0,0,0.3);
             border-left: 3px solid var(--gold);
-            padding: 24px;
+            padding: 27.9px;
         }
 
         .ask-card h4 {
@@ -1609,7 +1615,7 @@
         .vision-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 27.9px;
             margin-top: 48px;
             position: relative;
             z-index: 1;
@@ -1622,7 +1628,7 @@
         .vision-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
+            padding: 37.8px;
             position: relative;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
@@ -1648,7 +1654,7 @@
 
         .vision-card h4 {
             font-family: var(--font-display);
-            font-size: 1.8rem;
+            font-size: 2.106rem;
             margin-bottom: 10px;
             letter-spacing: 0.04em;
         }
@@ -1664,7 +1670,7 @@
         }
 
         .vision-card p {
-            font-size: 1.15rem;
+            font-size: 1.035rem;
             color: var(--light-gray);
             line-height: 1.75;
         }
@@ -1686,7 +1692,7 @@
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 27.9px;
             margin-top: 48px;
             position: relative;
             z-index: 1;
@@ -1699,7 +1705,7 @@
         .step-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
+            padding: 37.8px;
             text-align: center;
             position: relative;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -1720,20 +1726,20 @@
 
         .step-number {
             font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: 4.68rem;
             color: var(--gold);
             margin-bottom: 16px;
             letter-spacing: 0.02em;
         }
 
         .step-card h4 {
-            font-size: 1.2rem;
+            font-size: 1.08rem;
             font-weight: 700;
             margin-bottom: 14px;
         }
 
         .step-card p {
-            font-size: 1.15rem;
+            font-size: 1.035rem;
             color: var(--light-gray);
             line-height: 1.75;
         }
@@ -1754,7 +1760,7 @@
         }
 
         .quote-section blockquote {
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: clamp(1.638rem, 3.51vw, 2.34rem);
             font-weight: 500;
             line-height: 1.7;
             max-width: 900px;
@@ -1795,7 +1801,7 @@
         }
 
         .thanks .contact-name {
-            font-size: 1.7rem;
+            font-size: 1.989rem;
             font-weight: 700;
             margin-bottom: 10px;
         }
