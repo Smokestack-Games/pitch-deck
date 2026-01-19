@@ -1344,8 +1344,8 @@
 
         /* ==================== QUOTE ==================== */
         .quote-section {
-            background: var(--cream);
-            color: var(--black);
+            background: var(--dark-2);
+            color: var(--white);
         }
 
         .quote-section::before {
@@ -1353,22 +1353,23 @@
             position: absolute;
             inset: 0;
             background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             pointer-events: none;
         }
 
         .quote-section blockquote {
-            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            font-size: clamp(1.4rem, 3vw, 2rem);
             font-weight: 500;
-            line-height: 1.6;
-            max-width: 1000px;
+            line-height: 1.7;
+            max-width: 900px;
             position: relative;
             z-index: 1;
+            color: var(--light-gray);
         }
 
         .quote-section strong {
             font-weight: 700;
-            color: var(--rust);
+            color: var(--gold);
         }
 
         /* ==================== THANK YOU ==================== */
@@ -1469,8 +1470,8 @@
                     <p>RbxSync is our internal dev stack: git version control, VS Code, AI agents via MCP. A 2-person team ships what normally takes 5-6.</p>
                 </div>
                 <div class="thesis-card" data-num="04">
-                    <h4>Risk-staged execution</h4>
-                    <p>Each product funds the next. Borders proves revenue. Arcade proves distribution. Club Phoenix proves cultural pull.</p>
+                    <h4>Multiple revenue streams</h4>
+                    <p>Direct game revenue, tool licensing, platform distribution fees, and brand partnerships. Diversified income reduces single-product risk.</p>
                 </div>
             </div>
         </div>
@@ -1490,11 +1491,11 @@
                     </div>
                 </div>
                 <div class="product-card arcade">
-                    <span class="tag">Prove Distribution</span>
+                    <span class="tag">Platform Distribution</span>
                     <h4>THE IRON ARCADE</h4>
-                    <p>Embeddable arcade cabinets other developers drop into their games. Players buy tokens once, spend them anywhere. We take 30%.</p>
+                    <p>Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. We share revenue with partner games that distribute our cabinets.</p>
                     <div class="status">
-                        <span class="label">In Development</span>
+                        <span class="label">Planned</span>
                     </div>
                 </div>
                 <div class="product-card club">
@@ -1508,7 +1509,7 @@
                 <div class="product-card rbxsync">
                     <span class="tag">Dev Stack + Revenue</span>
                     <h4>RBXSYNC</h4>
-                    <p>AI-native sync tool for Roblox Studio. Our internal dev stack that we also license ($50-100). Git, VS Code, MCP for AI agents.</p>
+                    <p>AI-native sync tool for Roblox Studio. Our internal dev stack that we also license ($60 per license). Git, VS Code, MCP for AI agents.</p>
                     <div class="status">
                         <span class="live-badge">Launched</span>
                     </div>
@@ -1547,36 +1548,36 @@
                 <div class="timeline-item active">
                     <div class="timeline-date">Month 1-3 <span class="now">NOW</span></div>
                     <div class="timeline-content">
-                        <h4>Borders RTS Launch</h4>
-                        <p>Already in beta. Investment accelerates to full launch + monetization. Pay back $5K principal.</p>
+                        <h4>Borders RTS Development</h4>
+                        <p>Alpha live. Full rewrite with RbxSync stack, monetization implementation, launch preparation.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">Month 4</div>
+                    <div class="timeline-date">Month 4-5</div>
                     <div class="timeline-content">
                         <h4>Arcade Development</h4>
-                        <p>Build cabinet engine, first game (Pong clone), SDK for developers.</p>
+                        <p>Build standalone arcade game and cabinet engine for distribution.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">Month 5-8</div>
+                    <div class="timeline-date">Month 6-8</div>
                     <div class="timeline-content">
                         <h4>Iron Arcade Launch</h4>
-                        <p>Release cabinets, onboard first licensees, pay back $10K.</p>
+                        <p>Launch standalone game, release distributable cabinets, onboard partner games.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Month 9</div>
                     <div class="timeline-content">
                         <h4>Club Phoenix Production</h4>
-                        <p>Already in beta. Final production: lighting, sound, VIP areas, artist booking.</p>
+                        <p>Alpha live. Final production: lighting, sound, VIP areas, artist booking.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Month 10-12</div>
                     <div class="timeline-content">
                         <h4>Club Launch + Growth</h4>
-                        <p>Grand opening, brand partnerships, pay back final $10K. Sustainable revenue achieved.</p>
+                        <p>Grand opening, brand partnerships, sustainable revenue.</p>
                     </div>
                 </div>
             </div>
@@ -1591,13 +1592,14 @@
                 <div>
                     <h3>What It Is</h3>
                     <p style="color: var(--light-gray); margin-bottom: 24px;">A pixel-based real-time strategy game where players control nations, expand territory, and compete for map dominance. Features adaptive pan/zoom camera, mobile-first touch controls, and session-based competitive matches.</p>
+                    <h3>Current Status</h3>
+                    <p style="color: var(--light-gray); margin-bottom: 24px;">Live alpha available for playtesting. We are planning a full rewrite using our custom RbxSync stack to improve architecture and prepare for monetization.</p>
                     <h3>Why It Works</h3>
                     <ul>
                         <li><strong>RTS is underserved on Roblox</strong> with high demand and few quality options</li>
-                        <li><strong>Session-based matches</strong> = high replay rate</li>
+                        <li><strong>Session-based matches</strong> drive high replay rate</li>
                         <li><strong>Competitive ladder</strong> drives retention</li>
-                        <li><strong>Built with RbxSync + Claude</strong> reducing dev time by 60%</li>
-                        <li><strong>Already playable</strong> in live alpha</li>
+                        <li><strong>Full rewrite with RbxSync + Claude</strong> enables rapid iteration</li>
                     </ul>
                 </div>
                 <div>
@@ -1615,21 +1617,21 @@
                 </div>
             </div>
             <div class="milestones-grid" style="margin-top: 48px;">
-                <div class="milestone done">
-                    <h5>Core Gameplay</h5>
-                    <p>Territory system, nations, troops</p>
-                </div>
-                <div class="milestone done">
-                    <h5>Camera System</h5>
-                    <p>Pan/zoom, orbit-to-overhead</p>
-                </div>
-                <div class="milestone done">
-                    <h5>Mobile Support</h5>
-                    <p>Touch controls, pinch zoom</p>
-                </div>
                 <div class="milestone live">
-                    <h5>Beta Launch</h5>
-                    <p>Public testing, feedback</p>
+                    <h5>Alpha Live</h5>
+                    <p>Playable prototype for testing</p>
+                </div>
+                <div class="milestone">
+                    <h5>Architecture Rewrite</h5>
+                    <p>Rebuild with RbxSync stack</p>
+                </div>
+                <div class="milestone">
+                    <h5>Core Systems</h5>
+                    <p>Territory, nations, combat</p>
+                </div>
+                <div class="milestone">
+                    <h5>Mobile Optimization</h5>
+                    <p>Touch controls, performance</p>
                 </div>
                 <div class="milestone">
                     <h5>Monetization</h5>
@@ -1649,19 +1651,24 @@
             <h2>THE IRON ARCADE</h2>
             <div class="two-col">
                 <div>
-                    <h3>The Platform Play</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">We build arcade cabinet "containers" that any Roblox developer can drop into their game. Players buy tokens once, spend them anywhere. We take 30% of every transaction.</p>
-                    <h3>Why Developers Want This</h3>
+                    <h3>Two Products in One</h3>
+                    <p style="color: var(--light-gray); margin-bottom: 24px;">A standalone arcade game with classic cabinet experiences, plus embeddable cabinets that other Roblox developers can distribute in their games.</p>
+                    <h3>Monetization Model</h3>
                     <ul>
-                        <li><strong>Instant engagement boost:</strong> players stick around for minigames</li>
-                        <li><strong>Zero development cost:</strong> drag and drop integration</li>
-                        <li><strong>Revenue share</strong> on tokens spent in their experience</li>
-                        <li><strong>Global leaderboards</strong> drive competition & return visits</li>
+                        <li><strong>Pay-per-play:</strong> each game costs Robux to play</li>
+                        <li><strong>Standalone revenue:</strong> direct income from our arcade game</li>
+                        <li><strong>Distribution revenue:</strong> partner games sell our gamepass, we split proceeds</li>
+                        <li><strong>Partner incentive:</strong> game owners earn a cut for hosting our cabinets</li>
                     </ul>
                 </div>
                 <div>
-                    <h3>Network Effects</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 24px;">Each new partner game increases token utility, which drives token purchases, which attracts more partners. Network effects compound over time.</p>
+                    <h3>Why Developers Want This</h3>
+                    <ul>
+                        <li><strong>Passive revenue:</strong> earn from players using cabinets in their game</li>
+                        <li><strong>Engagement boost:</strong> players stick around for minigames</li>
+                        <li><strong>Zero development cost:</strong> drag and drop integration</li>
+                        <li><strong>Global leaderboards:</strong> drive competition and return visits</li>
+                    </ul>
                     <div class="revenue-target">
                         <p class="label">Target: 50 Partner Games</p>
                         <div class="amount">$8K/mo</div>
@@ -1713,15 +1720,15 @@
             <h2>FINANCIALS</h2>
             <div class="budget-grid">
                 <div>
-                    <h3>Use of Funds (Per Phase)</h3>
+                    <h3>Use of Funds (Borders RTS)</h3>
                     <table class="budget-table">
                         <tr>
                             <th>Category</th>
                             <th>Amount</th>
                         </tr>
                         <tr>
-                            <td>Staff (both team members)</td>
-                            <td>$2,000</td>
+                            <td>Staff ($2K each, 2 members)</td>
+                            <td>$4,000</td>
                         </tr>
                         <tr>
                             <td>Claude Max (2 subscriptions)</td>
@@ -1736,8 +1743,8 @@
                             <td>$400</td>
                         </tr>
                         <tr>
-                            <td>Total per phase</td>
-                            <td>$3,000</td>
+                            <td>Total (1 month of development)</td>
+                            <td>$5,000</td>
                         </tr>
                     </table>
                 </div>
@@ -1749,25 +1756,21 @@
                             <th>Investment</th>
                         </tr>
                         <tr>
-                            <td>Borders RTS</td>
+                            <td>Borders RTS (current ask)</td>
                             <td>$5,000</td>
                         </tr>
                         <tr>
-                            <td>The Iron Arcade</td>
-                            <td>$10,000</td>
+                            <td>The Iron Arcade (future)</td>
+                            <td>TBD</td>
                         </tr>
                         <tr>
-                            <td>Club Phoenix</td>
-                            <td>$10,000</td>
-                        </tr>
-                        <tr>
-                            <td>Total (all phases)</td>
-                            <td>$25,000</td>
+                            <td>Club Phoenix (future)</td>
+                            <td>TBD</td>
                         </tr>
                     </table>
                     <div class="budget-note" style="margin-top: 24px;">
-                        <strong>Current ask: $5,000 for Borders RTS only.</strong><br><br>
-                        Future phases self-funded from game revenue. No additional outside capital needed.
+                        <strong>Current ask: $5,000 for Borders RTS.</strong><br><br>
+                        We pay back principal from revenue before requesting additional funding for future products.
                     </div>
                 </div>
             </div>
@@ -1887,10 +1890,10 @@
                 <div class="ask-card">
                     <h4>What Happens Next</h4>
                     <ul>
-                        <li>Borders revenue funds Iron Arcade ($10K)</li>
-                        <li>Arcade revenue funds Club Phoenix ($10K)</li>
-                        <li>No additional outside capital needed</li>
-                        <li>Self-sustaining after $5K</li>
+                        <li>We pay back $5K principal from Borders revenue</li>
+                        <li>Request additional funding after payback</li>
+                        <li>Future products funded through same structure</li>
+                        <li>Investor gets paid back before each new phase</li>
                     </ul>
                 </div>
                 <div class="ask-card">
@@ -1898,8 +1901,8 @@
                     <ul>
                         <li>Products are already live, not speculative</li>
                         <li>Team has shipped before (The Block, RbxSync)</li>
-                        <li>Risk-staged execution</li>
-                        <li>Each phase proves the next</li>
+                        <li>Principal-only repayment, no equity</li>
+                        <li>Payback required before next funding request</li>
                     </ul>
                 </div>
             </div>
