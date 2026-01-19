@@ -17,22 +17,17 @@
             --gray: #888888;
             --light-gray: #b0b0b0;
             --white: #ffffff;
-
-            /* Industrial Smokestack palette */
             --rust: #360A0A;
             --rust-light: #4a1515;
             --rust-glow: rgba(54, 10, 10, 0.5);
             --gold: #FFE81F;
             --gold-dim: #c4b318;
-            --gold-glow: rgba(255, 232, 31, 0.2);
+            --gold-glow: rgba(255, 232, 31, 0.3);
             --cream: #FFF48F;
-
-            /* Product accents */
             --mint: #4AEDC4;
             --blue: #7DD3FC;
             --purple: #C084FC;
             --orange: #FB923C;
-
             --font-display: 'Bebas Neue', sans-serif;
             --font-body: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -46,288 +41,112 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
         }
 
         body {
             font-family: var(--font-body);
             background: var(--black);
             color: var(--white);
-            line-height: 1.75;
+            line-height: 1.7;
             font-size: 18px;
             overflow-x: hidden;
         }
 
-        /* Brick/Industrial pattern */
-        .brick-bg {
-            position: relative;
-        }
-
-        .brick-bg::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(45deg, var(--rust) 0%, var(--dark-1) 47%),
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 1;
-            pointer-events: none;
-        }
-
-        .brick-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 20% 100%, rgba(255, 232, 31, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 80% 0%, rgba(54, 10, 10, 0.3) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            right: 28px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 2px;
-            background: var(--dark-4);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .nav-dot:hover {
-            background: var(--gray);
-            transform: scale(1.4);
-        }
-
-        .nav-dot.active {
-            background: var(--gold);
-            box-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow);
-        }
-
-        .nav-dot::before {
-            content: attr(data-label);
-            position: absolute;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-family: var(--font-mono);
-            font-size: 10px;
-            letter-spacing: 0.05em;
-            color: var(--gray);
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-            text-transform: uppercase;
-        }
-
-        .nav-dot:hover::before {
-            opacity: 1;
-        }
-
-        /* Progress bar */
+        /* Progress indicator */
         .progress-bar {
             position: fixed;
             top: 0;
             left: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--rust-light), var(--gold), var(--cream));
-            z-index: 1001;
-            transition: width 0.15s ease-out;
+            z-index: 10000;
+            transition: width 0.1s linear;
         }
 
-        /* Sections */
-        section {
-            min-height: 100vh;
-            scroll-snap-align: start;
-            padding: 80px 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @media (max-width: 768px) {
-            section { padding: 60px 24px; }
-            .nav { display: none; }
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            width: 100%;
-            position: relative;
+        /* Brick texture overlay */
+        .brick-texture {
+            position: fixed;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.12'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
             z-index: 1;
+            opacity: 0.5;
         }
 
-        /* Typography */
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(5rem, 15vw, 12rem);
-            letter-spacing: 0.04em;
-            line-height: 0.85;
-            font-weight: 400;
-        }
-
-        h2 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            letter-spacing: 0.04em;
-            line-height: 0.95;
-            font-weight: 400;
-            margin-bottom: 48px;
-        }
-
-        h3 {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--gold);
-        }
-
-        .label {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gray);
-        }
-
-        .mono {
-            font-family: var(--font-mono);
-        }
-
-        /* Live indicator */
-        .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            background: rgba(74, 237, 196, 0.15);
-            border: 1px solid rgba(74, 237, 196, 0.4);
-            border-radius: 2px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--mint);
-        }
-
-        .live-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--mint);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 237, 196, 0.4); }
-            50% { opacity: 0.6; box-shadow: 0 0 0 4px transparent; }
-        }
-
-        /* Industrial decorative elements */
-        .industrial-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--rust-light), var(--gold-dim), var(--rust-light), transparent);
-            margin: 48px 0;
-        }
-
-        .corner-bracket {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--rust-light);
-        }
-
-        .corner-bracket.tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
-        .corner-bracket.tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
-        .corner-bracket.bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
-        .corner-bracket.br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
-
-        /* ==================== HERO ==================== */
-        .hero {
-            background:
-                linear-gradient(45deg, var(--rust) 0%, var(--dark-1) 47%);
+        /* ===== HERO SECTION - Full viewport with parallax layers ===== */
+        .hero-container {
             position: relative;
+            height: 300vh;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+        .hero-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--rust) 0%, var(--dark-1) 50%, var(--black) 100%);
         }
 
-        .hero::after {
-            content: '';
+        .hero-bg-layer {
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(ellipse 100% 80% at 50% 100%, rgba(255, 232, 31, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at 0% 0%, rgba(54, 10, 10, 0.5) 0%, transparent 50%);
-            pointer-events: none;
+            background: radial-gradient(ellipse 120% 80% at 50% 120%, rgba(255, 232, 31, 0.08) 0%, transparent 60%);
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
+            text-align: center;
+            z-index: 10;
+            transform: translateY(0);
+            transition: transform 0.1s linear;
         }
 
-        .hero .label {
+        .hero-label {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 24px;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        .hero h1 {
-            animation: fadeInUp 0.8s ease 0.1s forwards;
+            margin-bottom: 32px;
             opacity: 0;
-            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
-        .hero h1 .highlight {
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 18vw, 14rem);
+            line-height: 0.85;
+            letter-spacing: 0.04em;
+            text-shadow: 0 8px 60px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            animation: heroReveal 1s ease 0.4s forwards;
+        }
+
+        .hero-title .gold {
             color: var(--gold);
-            text-shadow: 0 0 60px var(--gold-glow);
+            text-shadow: 0 0 80px var(--gold-glow), 0 8px 60px rgba(0,0,0,0.5);
         }
 
         .hero-date {
             display: flex;
+            justify-content: center;
             gap: 12px;
             margin-top: 48px;
-            animation: fadeInUp 0.8s ease 0.2s forwards;
             opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.7s forwards;
         }
 
         .hero-date span {
             padding: 14px 28px;
             background: var(--dark-2);
             border: 1px solid var(--dark-4);
-            color: var(--white);
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 500;
             letter-spacing: 0.05em;
         }
@@ -338,175 +157,228 @@
             border-color: var(--gold);
         }
 
-        .confidential {
+        .hero-scroll-hint {
             position: absolute;
-            bottom: 32px;
-            left: 80px;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: var(--font-mono);
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.2);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
+            color: var(--gray);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1s forwards, float 2s ease-in-out infinite 1.5s;
+        }
+
+        .hero-scroll-hint::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin: 16px auto 0;
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ==================== ELEVATOR ==================== */
-        .elevator {
-            background: var(--gold);
-            color: var(--black);
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .elevator::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        /* ===== ELEVATOR PITCH - Pinned text reveal ===== */
+        .elevator-container {
+            position: relative;
+            min-height: 250vh;
+            background: var(--gold);
+        }
+
+        .elevator-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px;
+            overflow: hidden;
         }
 
         .elevator-content {
-            max-width: 1000px;
+            max-width: 1100px;
+            margin: 0 auto;
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
-        .elevator h2 {
-            font-family: var(--font-body);
-            font-size: clamp(1.6rem, 4vw, 2.6rem);
+        .elevator-text {
+            font-size: clamp(1.5rem, 4vw, 2.8rem);
             font-weight: 500;
             line-height: 1.6;
-            letter-spacing: -0.01em;
-            margin-bottom: 0;
+            color: var(--black);
+            opacity: 0;
+            transform: translateY(40px);
         }
 
-        .elevator h2 strong {
+        .elevator-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .elevator-text strong {
             font-weight: 700;
             color: var(--rust);
         }
 
         .elevator-highlight {
             margin-top: 48px;
-            padding: 36px;
+            padding: 40px;
             background: rgba(0,0,0,0.08);
             border-left: 5px solid var(--rust);
+            opacity: 0;
+            transform: translateX(-40px);
         }
 
-        .elevator-highlight p {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 12px;
-            line-height: 1.7;
+        .elevator-highlight.visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
         }
 
-        .elevator-highlight .big {
+        .elevator-big {
             font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: clamp(4rem, 12vw, 7rem);
             color: var(--rust);
             letter-spacing: 0.02em;
+            line-height: 1;
         }
 
-        /* ==================== THESIS ==================== */
-        .thesis {
-            background: var(--dark-1);
+        /* ===== THESIS - Staggered card reveal ===== */
+        .thesis-section {
+            position: relative;
+            padding: 160px 80px;
+            background: linear-gradient(180deg, var(--dark-1) 0%, var(--black) 100%);
+            min-height: 100vh;
         }
 
-        .thesis::before {
+        .thesis-section::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(135deg, var(--rust) 0%, transparent 30%),
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, var(--rust) 0%, transparent 100%);
+            opacity: 0.3;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: 0.04em;
+            margin-bottom: 64px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .thesis-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
-            margin-top: 48px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
         .thesis-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
+            padding: 40px;
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
         }
+
+        .thesis-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .thesis-card:nth-child(2) { transition-delay: 0.1s; }
+        .thesis-card:nth-child(3) { transition-delay: 0.2s; }
+        .thesis-card:nth-child(4) { transition-delay: 0.3s; }
 
         .thesis-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--rust-light);
-        }
-
-        .thesis-card::before {
-            display: none;
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 1px var(--rust-light);
         }
 
         .thesis-card h4 {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             color: var(--white);
         }
 
         .thesis-card p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
 
-        /* ==================== PRODUCTS ==================== */
-        .products {
-            background: var(--black);
+        /* ===== PRODUCTS - Horizontal scroll reveal ===== */
+        .products-container {
+            position: relative;
+            height: 400vh;
         }
 
-        .products::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 50% 50% at 100% 100%, var(--rust) 0%, transparent 50%);
-            opacity: 0.3;
-            pointer-events: none;
+        .products-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            overflow: hidden;
+            background: radial-gradient(ellipse 80% 80% at 100% 100%, var(--rust) 0%, var(--black) 50%);
         }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+        .products-header {
+            margin-bottom: 48px;
         }
 
-        @media (max-width: 1100px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 600px) {
-            .products-grid { grid-template-columns: 1fr; }
+        .products-track {
+            display: flex;
+            gap: 32px;
+            transition: transform 0.1s linear;
         }
 
         .product-card {
+            flex: 0 0 380px;
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 28px;
+            padding: 40px;
             position: relative;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: scale(1.02);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.5);
         }
 
         .product-card::before {
@@ -515,7 +387,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
         }
 
         .product-card.borders::before { background: var(--mint); }
@@ -523,336 +395,53 @@
         .product-card.club::before { background: var(--purple); }
         .product-card.rbxsync::before { background: var(--orange); }
 
-        .product-card .tag {
+        .product-tag {
             display: inline-block;
-            padding: 6px 12px;
+            padding: 8px 14px;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-bottom: 16px;
-            width: fit-content;
+            margin-bottom: 20px;
         }
 
-        .product-card.borders .tag { background: rgba(74,237,196,0.1); color: var(--mint); }
-        .product-card.arcade .tag { background: rgba(125,211,252,0.1); color: var(--blue); }
-        .product-card.club .tag { background: rgba(192,132,252,0.1); color: var(--purple); }
-        .product-card.rbxsync .tag { background: rgba(251,146,60,0.1); color: var(--orange); }
+        .product-card.borders .product-tag { background: rgba(74,237,196,0.15); color: var(--mint); }
+        .product-card.arcade .product-tag { background: rgba(125,211,252,0.15); color: var(--blue); }
+        .product-card.club .product-tag { background: rgba(192,132,252,0.15); color: var(--purple); }
+        .product-card.rbxsync .product-tag { background: rgba(251,146,60,0.15); color: var(--orange); }
 
-        .product-card h4 {
+        .product-card h3 {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 2.5rem;
             letter-spacing: 0.04em;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .product-card p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: var(--light-gray);
             line-height: 1.75;
-            flex-grow: 1;
-            margin-bottom: 16px;
-        }
-
-        .product-card .status {
-            margin-top: auto;
-        }
-
-        /* ==================== MARKET ==================== */
-        .market {
-            background: var(--dark-1);
-        }
-
-        .market::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin: 48px 0;
-        }
-
-        @media (max-width: 768px) {
-            .stats-row { grid-template-columns: 1fr; gap: 24px; }
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 48px 24px;
-            background: var(--dark-2);
-            border: 1px solid var(--dark-3);
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--rust-light), var(--gold));
-        }
-
-        .stat-number {
-            font-family: var(--font-display);
-            font-size: clamp(4rem, 10vw, 6rem);
-            color: var(--gold);
-            line-height: 1;
-            text-shadow: 0 0 40px var(--gold-glow);
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--light-gray);
-            margin-top: 16px;
-        }
-
-        .market-footer {
-            text-align: center;
-            font-size: 1.15rem;
-            font-weight: 500;
-            color: var(--light-gray);
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            line-height: 1.8;
-        }
-
-        .market-footer strong {
-            color: var(--gold);
-        }
-
-        /* ==================== TIMELINE ==================== */
-        .timeline-section {
-            background:
-                linear-gradient(135deg, var(--rust) 0%, var(--dark-1) 60%);
-        }
-
-        .timeline-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .timeline {
-            margin-top: 48px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 40px;
-            padding: 32px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-        }
-
-        @media (max-width: 600px) {
-            .timeline-item { grid-template-columns: 1fr; gap: 12px; }
-        }
-
-        .timeline-item.active::before {
-            content: '';
-            position: absolute;
-            left: 156px;
-            top: 40px;
-            width: 12px;
-            height: 12px;
-            background: var(--gold);
-            border-radius: 2px;
-            box-shadow: 0 0 20px var(--gold-glow);
-            animation: pulse-gold 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-gold {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--gold-glow); }
-            50% { opacity: 0.7; box-shadow: 0 0 20px var(--gold-glow); }
-        }
-
-        @media (max-width: 600px) {
-            .timeline-item.active::before { display: none; }
-        }
-
-        .timeline-date {
-            font-family: var(--font-mono);
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--gold);
-        }
-
-        .timeline-date .now {
-            display: inline-block;
-            padding: 4px 10px;
-            background: var(--gold);
-            color: var(--black);
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-left: 8px;
-        }
-
-        .timeline-content h4 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .timeline-content p {
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.7;
-        }
-
-        /* ==================== PRODUCT DEEP DIVES ==================== */
-        .deep-dive {
-            background: var(--dark-1);
-        }
-
-        .deep-dive::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .deep-dive.alt {
-            background: var(--black);
-        }
-
-        .deep-dive h2 {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
             margin-bottom: 24px;
         }
 
-        .deep-dive.borders h2 { color: var(--mint); }
-        .deep-dive.arcade h2 { color: var(--blue); }
-        .deep-dive.club h2 { color: var(--purple); }
-
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            position: relative;
-            z-index: 1;
-        }
-
-        @media (max-width: 900px) {
-            .two-col { grid-template-columns: 1fr; gap: 40px; }
-        }
-
-        .two-col ul {
-            list-style: none;
-        }
-
-        .two-col li {
-            padding: 16px 0;
-            padding-left: 28px;
-            position: relative;
-            font-size: 1.05rem;
-            color: var(--light-gray);
-            border-bottom: 1px solid var(--dark-3);
-            line-height: 1.7;
-        }
-
-        .two-col li:last-child {
-            border-bottom: none;
-        }
-
-        .two-col li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-family: var(--font-mono);
-        }
-
-        .two-col li strong {
-            color: var(--white);
-        }
-
-        .revenue-target {
-            background: var(--dark-2);
-            border: 1px solid var(--dark-3);
-            padding: 24px;
-            margin-top: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .revenue-target .label {
-            margin-bottom: 8px;
-        }
-
-        .revenue-target .amount {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            letter-spacing: 0.02em;
-        }
-
-        .borders .revenue-target .amount { color: var(--mint); }
-        .arcade .revenue-target .amount { color: var(--blue); }
-        .club .revenue-target .amount { color: var(--purple); }
-
-        /* ==================== MILESTONES ==================== */
-        .milestones-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-top: 32px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .milestone {
-            background: var(--dark-2);
-            border: 1px solid var(--dark-3);
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .milestone.done::before {
-            content: '✓';
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 20px;
-            height: 20px;
-            background: var(--mint);
-            color: var(--black);
-            border-radius: 2px;
-            display: flex;
+        .live-badge {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(74, 237, 196, 0.15);
+            border: 1px solid rgba(74, 237, 196, 0.4);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mint);
         }
 
-        .milestone.live::before {
+        .live-badge::before {
             content: '';
-            position: absolute;
-            top: 16px;
-            right: 16px;
             width: 8px;
             height: 8px;
             background: var(--mint);
@@ -860,50 +449,411 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .milestone h5 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74, 237, 196, 0.4); }
+            50% { opacity: 0.6; box-shadow: 0 0 0 6px transparent; }
         }
 
-        .milestone p {
+        .status-label {
+            font-family: var(--font-mono);
             font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             color: var(--gray);
-            line-height: 1.5;
         }
 
-        /* Compact milestone variant */
-        .milestones-grid .milestone {
-            padding: 12px 16px;
-        }
-
-        /* ==================== BUDGET ==================== */
-        .budget {
+        /* ===== MARKET STATS - Big number parallax ===== */
+        .market-section {
+            position: relative;
+            min-height: 150vh;
+            padding: 160px 80px;
             background: var(--dark-1);
         }
 
-        .budget::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 40% 40% at 0% 100%, var(--rust) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-            pointer-events: none;
+        .market-content {
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        .budget-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 48px;
-            margin-top: 48px;
-            position: relative;
-            z-index: 1;
+            margin: 80px 0;
         }
 
         @media (max-width: 900px) {
-            .budget-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 64px 32px;
+            background: var(--dark-2);
+            border: 1px solid var(--dark-3);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stat-card:nth-child(2) { transition-delay: 0.15s; }
+        .stat-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rust-light), var(--gold));
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 12vw, 7rem);
+            color: var(--gold);
+            line-height: 1;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .stat-label {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--light-gray);
+            margin-top: 20px;
+        }
+
+        .market-footer {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--light-gray);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .market-footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .market-footer strong {
+            color: var(--gold);
+        }
+
+        /* ===== TIMELINE - Animated path ===== */
+        .timeline-section {
+            position: relative;
+            padding: 160px 80px;
+            background: linear-gradient(135deg, var(--rust) 0%, var(--dark-1) 60%);
+            min-height: 100vh;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 48px;
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(2) { transition-delay: 0.1s; }
+        .timeline-item:nth-child(3) { transition-delay: 0.2s; }
+        .timeline-item:nth-child(4) { transition-delay: 0.3s; }
+        .timeline-item:nth-child(5) { transition-delay: 0.4s; }
+
+        .timeline-item.active {
+            position: relative;
+        }
+
+        .timeline-item.active::before {
+            content: '';
+            position: absolute;
+            left: 176px;
+            top: 48px;
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            box-shadow: 0 0 24px var(--gold-glow);
+            animation: pulseGold 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGold {
+            0%, 100% { box-shadow: 0 0 0 0 var(--gold-glow); }
+            50% { box-shadow: 0 0 24px var(--gold-glow); }
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .timeline-date .now-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.75;
+        }
+
+        @media (max-width: 700px) {
+            .timeline-item { grid-template-columns: 1fr; gap: 12px; }
+            .timeline-item.active::before { display: none; }
+        }
+
+        /* ===== PRODUCT DEEP DIVES - Pinned showcase ===== */
+        .deep-dive-container {
+            position: relative;
+            height: 300vh;
+        }
+
+        .deep-dive-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px;
+            overflow: hidden;
+        }
+
+        .deep-dive-sticky.borders-bg {
+            background: linear-gradient(135deg, var(--dark-1) 0%, rgba(74,237,196,0.08) 100%);
+        }
+
+        .deep-dive-sticky.arcade-bg {
+            background: linear-gradient(135deg, var(--black) 0%, rgba(125,211,252,0.08) 100%);
+        }
+
+        .deep-dive-sticky.club-bg {
+            background: linear-gradient(135deg, var(--dark-1) 0%, rgba(192,132,252,0.08) 100%);
+        }
+
+        .deep-dive-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .deep-dive-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .deep-dive-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            letter-spacing: 0.04em;
+        }
+
+        .deep-dive-title.mint { color: var(--mint); }
+        .deep-dive-title.blue { color: var(--blue); }
+        .deep-dive-title.purple { color: var(--purple); }
+
+        .deep-dive-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 1100px) {
+            .deep-dive-grid { grid-template-columns: 1fr; }
+        }
+
+        .video-placeholder {
+            background: var(--dark-3);
+            border: 2px dashed var(--dark-4);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .video-placeholder::before {
+            content: '▶';
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .deep-dive-col h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .deep-dive-col p {
+            font-size: 1rem;
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .deep-dive-col ul {
+            list-style: none;
+        }
+
+        .deep-dive-col li {
+            padding: 12px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 1rem;
+            color: var(--light-gray);
+            border-bottom: 1px solid var(--dark-3);
+            line-height: 1.7;
+        }
+
+        .deep-dive-col li:last-child { border-bottom: none; }
+
+        .deep-dive-col li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-family: var(--font-mono);
+        }
+
+        .deep-dive-col li strong {
+            color: var(--white);
+        }
+
+        .revenue-box {
+            background: var(--dark-2);
+            border: 1px solid var(--dark-3);
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .revenue-box .label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .revenue-box .amount {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .revenue-box .amount.mint { color: var(--mint); }
+        .revenue-box .amount.blue { color: var(--blue); }
+        .revenue-box .amount.purple { color: var(--purple); }
+
+        .milestones-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .milestone-chip {
+            background: var(--dark-2);
+            border: 1px solid var(--dark-3);
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .milestone-chip.live::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            background: var(--mint);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* ===== FINANCIALS ===== */
+        .financials-section {
+            position: relative;
+            padding: 160px 80px;
+            background: var(--dark-1);
+            min-height: 100vh;
+        }
+
+        .financials-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 50% 50% at 0% 100%, var(--rust) 0%, transparent 50%);
+            opacity: 0.3;
+        }
+
+        .financials-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .financials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            margin-top: 64px;
+        }
+
+        @media (max-width: 900px) {
+            .financials-grid { grid-template-columns: 1fr; }
         }
 
         .budget-table {
@@ -913,7 +863,7 @@
 
         .budget-table th,
         .budget-table td {
-            padding: 18px 16px;
+            padding: 20px 16px;
             text-align: left;
             border-bottom: 1px solid var(--dark-3);
         }
@@ -921,7 +871,7 @@
         .budget-table th {
             font-family: var(--font-mono);
             font-size: 0.85rem;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--gray);
             font-weight: 600;
@@ -938,7 +888,7 @@
         }
 
         .budget-table tr:last-child td {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--gold);
             border-bottom: none;
         }
@@ -946,84 +896,159 @@
         .budget-note {
             background: rgba(255, 232, 31, 0.05);
             border: 1px solid rgba(255, 232, 31, 0.2);
-            padding: 28px;
+            padding: 32px;
+            margin-top: 32px;
             font-size: 1.1rem;
-            font-weight: 500;
             color: var(--light-gray);
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .budget-note strong {
             color: var(--gold);
         }
 
-        /* ==================== TEAM ==================== */
-        .team {
-            background: var(--black);
+        /* Revenue projection cards */
+        .projection-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 64px;
         }
 
-        .team::before {
+        @media (max-width: 1000px) {
+            .projection-cards { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .projection-cards { grid-template-columns: 1fr; }
+        }
+
+        .projection-card {
+            background: var(--dark-2);
+            padding: 28px;
+            border-left: 4px solid;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .projection-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .projection-card:nth-child(2) { transition-delay: 0.1s; }
+        .projection-card:nth-child(3) { transition-delay: 0.2s; }
+        .projection-card:nth-child(4) { transition-delay: 0.3s; }
+
+        .projection-card.borders { border-color: var(--mint); }
+        .projection-card.arcade { border-color: var(--blue); }
+        .projection-card.club { border-color: var(--purple); }
+        .projection-card.rbxsync { border-color: var(--orange); }
+
+        .projection-card .name {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .projection-card .value {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .projection-card.borders .value { color: var(--mint); }
+        .projection-card.arcade .value { color: var(--blue); }
+        .projection-card.club .value { color: var(--purple); }
+        .projection-card.rbxsync .value { color: var(--orange); }
+
+        .projection-total {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 1.2rem;
+            color: var(--light-gray);
+        }
+
+        .projection-total strong {
+            color: var(--gold);
+        }
+
+        /* ===== TEAM ===== */
+        .team-section {
+            position: relative;
+            padding: 160px 80px;
+            background: var(--black);
+            min-height: 100vh;
+        }
+
+        .team-section::before {
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(ellipse 60% 60% at 50% 100%, var(--rust) 0%, transparent 50%);
+            background: radial-gradient(ellipse 60% 60% at 50% 100%, var(--rust) 0%, transparent 50%);
             opacity: 0.2;
-            pointer-events: none;
+        }
+
+        .team-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .team-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            max-width: 900px;
-            margin: 48px auto 0;
-            position: relative;
-            z-index: 1;
+            gap: 40px;
+            margin-top: 64px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
             .team-grid { grid-template-columns: 1fr; }
         }
 
         .team-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 48px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .team-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--rust-light), var(--gold));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--white);
-            margin-bottom: 24px;
+        .team-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-card:nth-child(2) { transition-delay: 0.15s; }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 28px;
         }
 
         .team-card h4 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .team-card .role {
             font-family: var(--font-mono);
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .team-card p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--light-gray);
             line-height: 1.8;
         }
@@ -1033,29 +1058,142 @@
             font-weight: 500;
         }
 
-        /* ==================== WHY WE WIN ==================== */
-        .why-win {
+        .collab-section {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .collab-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 32px;
+        }
+
+        .collab-section p {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .collab-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .collab-logo {
+            text-align: center;
+        }
+
+        .collab-logo img {
+            height: 32px;
+            margin-bottom: 8px;
+            filter: brightness(0.9);
+        }
+
+        .collab-logo span {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* ===== TECH STACK ===== */
+        .tech-section {
+            position: relative;
+            padding: 160px 80px;
             background: var(--dark-1);
         }
 
-        .why-win::before {
+        .tech-content {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .tech-intro {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            max-width: 900px;
+            margin-bottom: 64px;
+            line-height: 1.8;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .tech-grid { grid-template-columns: 1fr; }
+        }
+
+        .tech-card {
+            background: var(--dark-2);
+            border: 1px solid var(--dark-3);
+            padding: 36px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .tech-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tech-card:nth-child(2) { transition-delay: 0.1s; }
+        .tech-card:nth-child(3) { transition-delay: 0.2s; }
+        .tech-card:nth-child(4) { transition-delay: 0.3s; }
+
+        .tech-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .tech-card p {
+            font-size: 1.05rem;
+            color: var(--light-gray);
+            line-height: 1.8;
+        }
+
+        /* ===== WHY WE WIN ===== */
+        .win-section {
+            position: relative;
+            padding: 160px 80px;
+            background: linear-gradient(180deg, var(--black) 0%, var(--dark-1) 100%);
+        }
+
+        .win-section::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(180deg, var(--rust) 0%, transparent 30%),
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: linear-gradient(to bottom, var(--rust) 0%, transparent 100%);
+            opacity: 0.3;
+        }
+
+        .win-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .win-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            margin-top: 48px;
-            position: relative;
-            z-index: 1;
+            margin-top: 64px;
         }
 
         @media (max-width: 900px) {
@@ -1065,15 +1203,26 @@
         .win-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 36px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
+        .win-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .win-card:nth-child(2) { transition-delay: 0.1s; }
+        .win-card:nth-child(3) { transition-delay: 0.2s; }
+        .win-card:nth-child(4) { transition-delay: 0.3s; }
+
         .win-card h4 {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 18px;
             color: var(--gold);
+            margin-bottom: 20px;
         }
 
         .win-card p {
@@ -1085,7 +1234,7 @@
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 14px;
+            margin-top: 16px;
         }
 
         .comparison-table th,
@@ -1105,133 +1254,173 @@
             color: var(--mint);
         }
 
-        /* ==================== THE ASK ==================== */
-        .the-ask {
-            background:
-                linear-gradient(135deg, var(--rust) 0%, var(--dark-1) 70%);
-            text-align: center;
-        }
-
-        .the-ask::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .the-ask::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255, 232, 31, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .the-ask .container {
+        /* ===== THE ASK - Dramatic reveal ===== */
+        .ask-container {
             position: relative;
-            z-index: 1;
+            height: 250vh;
+        }
+
+        .ask-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--rust) 0%, var(--dark-1) 70%);
+            overflow: hidden;
+        }
+
+        .ask-sticky::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(255, 232, 31, 0.06) 0%, transparent 50%);
+        }
+
+        .ask-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            padding: 0 40px;
         }
 
         .ask-amount {
             font-family: var(--font-display);
-            font-size: clamp(6rem, 20vw, 14rem);
+            font-size: clamp(6rem, 22vw, 16rem);
             line-height: 1;
             color: var(--gold);
-            text-shadow: 0 0 80px var(--gold-glow);
-            margin-bottom: 16px;
+            text-shadow: 0 0 100px var(--gold-glow);
             letter-spacing: 0.02em;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .ask-amount.visible {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .ask-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 500;
             color: rgba(255,255,255,0.9);
-            margin-bottom: 64px;
+            margin-top: 16px;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+        }
+
+        .ask-subtitle.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .ask-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
             text-align: left;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
             .ask-grid { grid-template-columns: 1fr; }
         }
 
         .ask-card {
-            background: rgba(0,0,0,0.3);
-            border-left: 3px solid var(--gold);
-            padding: 24px;
+            background: rgba(0,0,0,0.35);
+            border-left: 4px solid var(--gold);
+            padding: 28px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
+        .ask-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ask-card:nth-child(2) { transition-delay: 0.1s; }
+        .ask-card:nth-child(3) { transition-delay: 0.2s; }
+        .ask-card:nth-child(4) { transition-delay: 0.3s; }
 
         .ask-card h4 {
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--gold);
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .ask-card p, .ask-card li {
+        .ask-card li {
             font-size: 1.05rem;
             color: rgba(255,255,255,0.9);
             line-height: 1.8;
-        }
-
-        .ask-card ul {
             list-style: none;
+            padding-left: 16px;
+            position: relative;
         }
 
         .ask-card li::before {
             content: '•';
+            position: absolute;
+            left: 0;
             color: var(--gold);
-            margin-right: 8px;
         }
 
-        /* ==================== VISION ==================== */
-        .vision {
+        /* ===== VISION ===== */
+        .vision-section {
+            position: relative;
+            padding: 160px 80px;
             background: var(--black);
         }
 
-        .vision::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+        .vision-content {
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        .vision-cards {
+        .vision-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-top: -40px;
+            margin-bottom: 64px;
+        }
+
+        .vision-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-top: 48px;
-            position: relative;
-            z-index: 1;
         }
 
         @media (max-width: 900px) {
-            .vision-cards { grid-template-columns: 1fr; }
+            .vision-grid { grid-template-columns: 1fr; }
         }
 
         .vision-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
+            padding: 36px;
             position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
+        .vision-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .vision-card:nth-child(2) { transition-delay: 0.1s; }
+        .vision-card:nth-child(3) { transition-delay: 0.2s; }
 
         .vision-card.active {
             border-color: var(--gold);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 0 1px var(--gold);
+            box-shadow: 0 0 0 1px var(--gold);
         }
 
         .vision-card.active::before {
@@ -1239,59 +1428,62 @@
             position: absolute;
             top: 16px;
             right: 16px;
-            padding: 4px 8px;
+            padding: 4px 10px;
             background: var(--gold);
             color: var(--black);
             font-family: var(--font-mono);
-            font-size: 0.6rem;
-            font-weight: 600;
+            font-size: 0.65rem;
+            font-weight: 700;
             letter-spacing: 0.05em;
         }
 
         .vision-card h4 {
             font-family: var(--font-display);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 2rem;
             letter-spacing: 0.04em;
+            margin-bottom: 8px;
         }
 
         .vision-card .division {
             font-family: var(--font-mono);
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .vision-card p {
             font-size: 1.05rem;
             color: var(--light-gray);
-            line-height: 1.75;
+            line-height: 1.8;
         }
 
-        /* ==================== NEXT STEPS ==================== */
-        .next-steps {
+        .vision-footer {
+            text-align: center;
+            margin-top: 48px;
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* ===== NEXT STEPS ===== */
+        .steps-section {
+            position: relative;
+            padding: 160px 80px;
             background: var(--dark-1);
         }
 
-        .next-steps::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+        .steps-content {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-top: 48px;
-            position: relative;
-            z-index: 1;
+            margin-top: 64px;
         }
 
         @media (max-width: 800px) {
@@ -1301,11 +1493,21 @@
         .step-card {
             background: var(--dark-2);
             border: 1px solid var(--dark-3);
-            padding: 32px;
+            padding: 40px;
             text-align: center;
             position: relative;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+
+        .step-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-card:nth-child(2) { transition-delay: 0.1s; }
+        .step-card:nth-child(3) { transition-delay: 0.2s; }
 
         .step-card::before {
             content: '';
@@ -1313,7 +1515,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
         }
 
         .step-card:nth-child(1)::before { background: var(--gold); }
@@ -1322,219 +1524,183 @@
 
         .step-number {
             font-family: var(--font-display);
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: var(--gold);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             letter-spacing: 0.02em;
         }
 
         .step-card h4 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .step-card p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--light-gray);
-            line-height: 1.75;
+            line-height: 1.8;
         }
 
-        /* ==================== QUOTE ==================== */
+        /* ===== QUOTE ===== */
         .quote-section {
+            position: relative;
+            padding: 160px 80px;
             background: var(--dark-2);
-            color: var(--white);
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
         }
 
-        .quote-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.15'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+        .quote-content {
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .quote-section blockquote {
-            font-size: clamp(1.4rem, 3vw, 2rem);
+        .quote-text {
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
             font-weight: 500;
             line-height: 1.7;
-            max-width: 900px;
-            position: relative;
-            z-index: 1;
             color: var(--light-gray);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .quote-section strong {
-            font-weight: 700;
+        .quote-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-text strong {
             color: var(--gold);
+            font-weight: 700;
         }
 
-        /* ==================== THANK YOU ==================== */
-        .thanks {
+        /* ===== THANK YOU ===== */
+        .thanks-section {
+            position: relative;
+            padding: 160px 80px;
             background: var(--gold);
             color: var(--black);
             text-align: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .thanks::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                url("data:image/svg+xml,%3Csvg width='84' height='88' viewBox='0 0 84 88' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M0 0h84v88H0V0zm2 2h80v40H2V2zM0 46h40v40H0V46zm44 0h40v40H44V46z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .thanks .container {
+        .thanks-content {
             position: relative;
-            z-index: 1;
+            z-index: 10;
         }
 
-        .thanks h1 {
+        .thanks-title {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 15vw, 12rem);
+            letter-spacing: 0.04em;
             margin-bottom: 48px;
-            text-shadow: none;
         }
 
-        .thanks .contact-name {
-            font-size: 1.7rem;
+        .thanks-name {
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .thanks .contact-email {
+        .thanks-email {
             font-family: var(--font-mono);
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 500;
             opacity: 0.9;
         }
 
-        .thanks .tagline {
+        .thanks-tagline {
             margin-top: 64px;
             font-size: 1.1rem;
             font-weight: 500;
             opacity: 0.8;
         }
 
-        /* Video/Image Placeholders */
-        .video-placeholder {
-            background: var(--dark-3);
-            border: 2px dashed var(--dark-4);
-            border-radius: 4px;
-            aspect-ratio: 16/9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 8px;
-            color: var(--gray);
-            font-size: 0.8rem;
-        }
-
-        .video-placeholder::before {
-            content: '▶';
-            font-size: 1.5rem;
-            color: var(--gold);
-        }
-
-        /* Compact deep-dive layout with video */
-        .deep-dive-compact {
-            display: grid;
-            grid-template-columns: 280px 1fr 1fr;
-            gap: 32px;
-            align-items: start;
-        }
-
-        .deep-dive-compact .video-placeholder {
-            height: 158px;
-            aspect-ratio: auto;
-        }
-
-        @media (max-width: 1024px) {
-            .deep-dive-compact {
-                grid-template-columns: 1fr;
-            }
-            .deep-dive-compact .video-placeholder {
-                max-width: 400px;
-                height: auto;
-                aspect-ratio: 16/9;
-            }
-        }
-
-        .image-placeholder {
-            background: var(--dark-3);
-            border: 2px dashed var(--dark-4);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-
-        .image-placeholder.avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-        }
-
-        .image-placeholder.logo {
-            width: 100px;
-            height: 40px;
-        }
-
         /* Utility */
-        .text-gold { color: var(--gold); }
-        .text-rust { color: var(--rust); }
+        @media (max-width: 768px) {
+            .hero-container,
+            .elevator-container,
+            .products-container,
+            .deep-dive-container,
+            .ask-container { height: auto; }
+
+            .hero-sticky,
+            .elevator-sticky,
+            .products-sticky,
+            .deep-dive-sticky,
+            .ask-sticky {
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            section { padding: 80px 24px; }
+        }
     </style>
 </head>
 <body>
     <div class="progress-bar" id="progress"></div>
-    <nav class="nav" id="nav"></nav>
+    <div class="brick-texture"></div>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-        <div class="container hero-content">
-            <p class="label">Pitch Deck | Confidential</p>
-            <h1>SMOKESTACK<br><span class="highlight">GAMES</span></h1>
-            <div class="hero-date">
-                <span>Q1</span>
-                <span>JANUARY</span>
-                <span>2026</span>
+    <!-- ===== HERO ===== -->
+    <div class="hero-container">
+        <div class="hero-sticky">
+            <div class="hero-bg-layer"></div>
+            <div class="hero-content" id="hero-content">
+                <p class="hero-label">Pitch Deck | Confidential</p>
+                <h1 class="hero-title">SMOKESTACK<br><span class="gold">GAMES</span></h1>
+                <div class="hero-date">
+                    <span>Q1</span>
+                    <span>JANUARY</span>
+                    <span>2026</span>
+                </div>
+            </div>
+            <div class="hero-scroll-hint">Scroll to explore</div>
+        </div>
+    </div>
+
+    <!-- ===== ELEVATOR ===== -->
+    <div class="elevator-container">
+        <div class="elevator-sticky">
+            <div class="elevator-content">
+                <p class="elevator-text" data-animate>
+                    We build <strong>high-retention multiplayer games</strong> on Roblox that generate <strong>predictable revenue</strong> without requiring viral-hit scale.
+                </p>
+                <div class="elevator-highlight" data-animate>
+                    <p style="font-size: 1.3rem; font-weight: 500; margin-bottom: 16px; color: var(--black);">
+                        <strong>We're not starting from zero.</strong> Borders RTS, Club Phoenix, and RbxSync are all live today.
+                    </p>
+                    <p class="elevator-big">$5K</p>
+                    <p style="font-size: 1.1rem; color: var(--rust); margin-top: 8px;">accelerates what we've already started</p>
+                </div>
             </div>
         </div>
-        <p class="confidential">Confidential</p>
-    </section>
+    </div>
 
-    <!-- ELEVATOR -->
-    <section class="elevator" id="elevator">
-        <div class="container elevator-content">
-            <h2>We build <strong>high-retention multiplayer games</strong> on Roblox that generate <strong>predictable revenue</strong> without requiring viral-hit scale.</h2>
-            <div class="elevator-highlight">
-                <p><strong>We're not starting from zero.</strong> Borders RTS, Club Phoenix, and RbxSync are all live today. We built our own dev stack. We've shipped nightclub experiences before.</p>
-                <p style="margin-top: 24px;"><span class="big">$5K</span> accelerates what we've already started. Revenue pays it back, then funds everything else.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- THESIS -->
-    <section class="thesis" id="thesis">
-        <div class="container">
-            <h2>OUR THESIS</h2>
+    <!-- ===== THESIS ===== -->
+    <section class="thesis-section">
+        <div style="max-width: 1300px; margin: 0 auto; position: relative; z-index: 10;">
+            <h2 class="section-title" data-animate>OUR THESIS</h2>
             <div class="thesis-grid">
-                <div class="thesis-card" data-num="01">
+                <div class="thesis-card" data-animate>
                     <h4>You don't need a viral hit</h4>
                     <p>Games with 2-5K concurrent users generate $2-5K/month with strong retention loops. We focus on predictable, recurring revenue.</p>
                 </div>
-                <div class="thesis-card" data-num="02">
+                <div class="thesis-card" data-animate>
                     <h4>We've already built the foundation</h4>
                     <p>Three products live today. This is a pitch to accelerate what's already working and generating traction.</p>
                 </div>
-                <div class="thesis-card" data-num="03">
+                <div class="thesis-card" data-animate>
                     <h4>We built our own infrastructure</h4>
                     <p>RbxSync is our internal dev stack: git version control, VS Code, AI agents via MCP. A 2-person team ships what normally takes 5-6.</p>
                 </div>
-                <div class="thesis-card" data-num="04">
+                <div class="thesis-card" data-animate>
                     <h4>Multiple revenue streams</h4>
                     <p>Direct game revenue, tool licensing, platform distribution fees, and brand partnerships. Diversified income reduces single-product risk.</p>
                 </div>
@@ -1542,426 +1708,360 @@
         </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section class="products" id="products">
-        <div class="container">
-            <h2>FOUR PRODUCTS</h2>
-            <div class="products-grid">
-                <div class="product-card borders">
-                    <span class="tag">Prove Revenue</span>
-                    <h4>BORDERS RTS</h4>
-                    <p>Real-time territory control strategy game. Pixel-based map conquest with nations, troops, and tactical expansion. Mobile-first.</p>
-                    <div class="status">
+    <!-- ===== PRODUCTS ===== -->
+    <div class="products-container">
+        <div class="products-sticky">
+            <div style="max-width: 1600px; margin: 0 auto; width: 100%;">
+                <div class="products-header">
+                    <h2 class="section-title" style="margin-bottom: 0;" data-animate>FOUR PRODUCTS</h2>
+                </div>
+                <div class="products-track" id="products-track">
+                    <div class="product-card borders">
+                        <span class="product-tag">Prove Revenue</span>
+                        <h3>BORDERS RTS</h3>
+                        <p>Real-time territory control strategy game. Pixel-based map conquest with nations, troops, and tactical expansion. Mobile-first.</p>
                         <span class="live-badge">Live Alpha</span>
                     </div>
-                </div>
-                <div class="product-card arcade">
-                    <span class="tag">Platform Distribution</span>
-                    <h4>THE IRON ARCADE</h4>
-                    <p>Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. Partner games sell our gamepass developer product and share revenue.</p>
-                    <div class="status">
-                        <span class="label">Planned</span>
+                    <div class="product-card arcade">
+                        <span class="product-tag">Platform Distribution</span>
+                        <h3>THE IRON ARCADE</h3>
+                        <p>Standalone arcade game plus embeddable cabinets for other developers. Each play costs Robux. Partner games sell our gamepass and share revenue.</p>
+                        <span class="status-label">Planned</span>
                     </div>
-                </div>
-                <div class="product-card club">
-                    <span class="tag">Prove Culture</span>
-                    <h4>CLUB PHOENIX</h4>
-                    <p>18+ virtual nightclub with live DJ performances, arcade games, and brand activations. Built on our experience running The Block.</p>
-                    <div class="status">
+                    <div class="product-card club">
+                        <span class="product-tag">Prove Culture</span>
+                        <h3>CLUB PHOENIX</h3>
+                        <p>18+ virtual nightclub with live DJ performances, arcade games, and brand activations. Built on our experience running The Block.</p>
                         <span class="live-badge">Live Alpha</span>
                     </div>
-                </div>
-                <div class="product-card rbxsync">
-                    <span class="tag">Dev Stack + Revenue</span>
-                    <h4>RBXSYNC</h4>
-                    <p>AI-native sync tool for Roblox Studio. Our internal dev stack that we also license ($60 per license). Git, VS Code, MCP for AI agents.</p>
-                    <div class="status">
+                    <div class="product-card rbxsync">
+                        <span class="product-tag">Dev Stack + Revenue</span>
+                        <h3>RBXSYNC</h3>
+                        <p>AI-native sync tool for Roblox Studio. Our internal dev stack that we also license ($60 per license). Git, VS Code, MCP for AI agents.</p>
                         <span class="live-badge">Launched</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- MARKET -->
-    <section class="market" id="market">
-        <div class="container">
-            <h2>WHY ROBLOX, WHY NOW</h2>
-            <div class="stats-row">
-                <div class="stat-card">
+    <!-- ===== MARKET ===== -->
+    <section class="market-section">
+        <div class="market-content">
+            <h2 class="section-title" data-animate>WHY ROBLOX, WHY NOW</h2>
+            <div class="stats-grid">
+                <div class="stat-card" data-animate>
                     <div class="stat-number">380M</div>
                     <div class="stat-label">Monthly Active Users</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-animate>
                     <div class="stat-number">$3.6B</div>
                     <div class="stat-label">Platform Revenue (2024)</div>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card" data-animate>
                     <div class="stat-number">60%</div>
                     <div class="stat-label">Users Aged 13+</div>
                 </div>
             </div>
-            <p class="market-footer">Games with <strong>2-5K concurrent users</strong> generate <strong>$2-5K/month</strong> with strong retention loops. Our model targets consistent, predictable revenue.</p>
+            <p class="market-footer" data-animate>
+                Games with <strong>2-5K concurrent users</strong> generate <strong>$2-5K/month</strong> with strong retention loops. Our model targets consistent, predictable revenue.
+            </p>
         </div>
     </section>
 
-    <!-- TIMELINE -->
-    <section class="timeline-section" id="timeline">
-        <div class="container">
-            <h2>12-MONTH ROADMAP</h2>
-            <div class="timeline">
-                <div class="timeline-item active">
-                    <div class="timeline-date">Month 1-3 <span class="now">NOW</span></div>
-                    <div class="timeline-content">
-                        <h4>Borders RTS Development</h4>
-                        <p>Alpha live. Full rewrite with RbxSync stack, monetization implementation, launch preparation.</p>
-                    </div>
+    <!-- ===== TIMELINE ===== -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <h2 class="section-title" data-animate>12-MONTH ROADMAP</h2>
+            <div class="timeline-item active" data-animate>
+                <div class="timeline-date">Month 1-3 <span class="now-badge">NOW</span></div>
+                <div class="timeline-content">
+                    <h4>Borders RTS Development</h4>
+                    <p>Alpha live. Full rewrite with RbxSync stack, monetization implementation, launch preparation.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Month 4-5</div>
-                    <div class="timeline-content">
-                        <h4>Arcade Development</h4>
-                        <p>Build standalone arcade game and cabinet engine for distribution.</p>
-                    </div>
+            </div>
+            <div class="timeline-item" data-animate>
+                <div class="timeline-date">Month 4-5</div>
+                <div class="timeline-content">
+                    <h4>Arcade Development</h4>
+                    <p>Build standalone arcade game and cabinet engine for distribution.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Month 6-8</div>
-                    <div class="timeline-content">
-                        <h4>Iron Arcade Launch</h4>
-                        <p>Launch standalone game, release distributable cabinets, onboard partner games.</p>
-                    </div>
+            </div>
+            <div class="timeline-item" data-animate>
+                <div class="timeline-date">Month 6-8</div>
+                <div class="timeline-content">
+                    <h4>Iron Arcade Launch</h4>
+                    <p>Launch standalone game, release distributable cabinets, onboard partner games.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Month 9</div>
-                    <div class="timeline-content">
-                        <h4>Club Phoenix Production</h4>
-                        <p>Alpha live. Final production: lighting, sound, VIP areas, artist booking.</p>
-                    </div>
+            </div>
+            <div class="timeline-item" data-animate>
+                <div class="timeline-date">Month 9</div>
+                <div class="timeline-content">
+                    <h4>Club Phoenix Production</h4>
+                    <p>Alpha live. Final production: lighting, sound, VIP areas, artist booking.</p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Month 10-12</div>
-                    <div class="timeline-content">
-                        <h4>Club Launch + Growth</h4>
-                        <p>Grand opening, brand partnerships, sustainable revenue.</p>
-                    </div>
+            </div>
+            <div class="timeline-item" data-animate>
+                <div class="timeline-date">Month 10-12</div>
+                <div class="timeline-content">
+                    <h4>Club Launch + Growth</h4>
+                    <p>Grand opening, brand partnerships, sustainable revenue.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BORDERS RTS -->
-    <section class="deep-dive borders" id="borders">
-        <div class="container">
-            <h2>BORDERS RTS <span class="live-badge">Live Alpha</span></h2>
-            <div class="deep-dive-compact">
-                <div class="video-placeholder">
-                    <span>Gameplay Video</span>
+    <!-- ===== BORDERS RTS DEEP DIVE ===== -->
+    <div class="deep-dive-container">
+        <div class="deep-dive-sticky borders-bg">
+            <div class="deep-dive-content">
+                <div class="deep-dive-header">
+                    <h2 class="deep-dive-title mint">BORDERS RTS</h2>
+                    <span class="live-badge">Live Alpha</span>
                 </div>
-                <div>
-                    <h3>What It Is</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 16px; font-size: 0.95rem;">Pixel-based RTS where players control nations, expand territory, and compete for map dominance. Mobile-first with adaptive camera.</p>
-                    <h3>Why It Works</h3>
-                    <ul style="font-size: 0.95rem;">
-                        <li><strong>RTS underserved on Roblox</strong> with high demand</li>
-                        <li><strong>Session-based</strong> drives replay rate</li>
-                        <li><strong>Competitive ladder</strong> drives retention</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Monetization</h3>
-                    <ul style="font-size: 0.95rem;">
-                        <li><strong>Battle Pass:</strong> $4.99/season</li>
-                        <li><strong>Commander Skins:</strong> $1-5</li>
-                        <li><strong>Boosts & Premium Maps</strong></li>
-                    </ul>
-                    <div class="revenue-target" style="margin-top: 16px;">
-                        <p class="label">Target: 2,500 CCU</p>
-                        <div class="amount">$2.5K/mo</div>
+                <div class="deep-dive-grid">
+                    <div class="video-placeholder">
+                        <span>Gameplay Video</span>
+                    </div>
+                    <div class="deep-dive-col">
+                        <h3>What It Is</h3>
+                        <p>Pixel-based RTS where players control nations, expand territory, and compete for map dominance. Mobile-first with adaptive camera.</p>
+                        <h3>Why It Works</h3>
+                        <ul>
+                            <li><strong>RTS underserved on Roblox</strong> with high demand</li>
+                            <li><strong>Session-based</strong> drives replay rate</li>
+                            <li><strong>Competitive ladder</strong> drives retention</li>
+                        </ul>
+                    </div>
+                    <div class="deep-dive-col">
+                        <h3>Monetization</h3>
+                        <ul>
+                            <li><strong>Battle Pass:</strong> $4.99/season</li>
+                            <li><strong>Commander Skins:</strong> $1-5</li>
+                            <li><strong>Boosts & Premium Maps</strong></li>
+                        </ul>
+                        <div class="revenue-box">
+                            <p class="label">Target: 2,500 CCU</p>
+                            <div class="amount mint">$2.5K/mo</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="milestones-grid" style="margin-top: 32px;">
-                <div class="milestone live"><h5>Alpha Live</h5></div>
-                <div class="milestone"><h5>Rewrite</h5></div>
-                <div class="milestone"><h5>Core Systems</h5></div>
-                <div class="milestone"><h5>Mobile</h5></div>
-                <div class="milestone"><h5>Monetization</h5></div>
-                <div class="milestone"><h5>Launch</h5></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- IRON ARCADE -->
-    <section class="deep-dive arcade alt" id="arcade">
-        <div class="container">
-            <h2>THE IRON ARCADE</h2>
-            <div class="deep-dive-compact">
-                <div class="video-placeholder">
-                    <span>Prototype Video</span>
-                </div>
-                <div>
-                    <h3>Two Products in One</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 16px; font-size: 0.95rem;">Standalone arcade game plus embeddable cabinets for other Roblox developers to distribute.</p>
-                    <h3>Monetization</h3>
-                    <ul style="font-size: 0.95rem;">
-                        <li><strong>Pay-per-play:</strong> Robux per game</li>
-                        <li><strong>Standalone:</strong> direct revenue</li>
-                        <li><strong>Distribution:</strong> partner gamepass split</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Why Developers Want This</h3>
-                    <ul style="font-size: 0.95rem;">
-                        <li><strong>Passive revenue</strong> from cabinet usage</li>
-                        <li><strong>Engagement boost</strong> from minigames</li>
-                        <li><strong>Zero dev cost:</strong> drag and drop</li>
-                        <li><strong>Global leaderboards</strong></li>
-                    </ul>
-                    <div class="revenue-target" style="margin-top: 16px;">
-                        <p class="label">Target: 50 Partner Games</p>
-                        <div class="amount">$5K/mo</div>
-                    </div>
+                <div class="milestones-row">
+                    <div class="milestone-chip live">Alpha Live</div>
+                    <div class="milestone-chip">Rewrite</div>
+                    <div class="milestone-chip">Core Systems</div>
+                    <div class="milestone-chip">Mobile</div>
+                    <div class="milestone-chip">Monetization</div>
+                    <div class="milestone-chip">Launch</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CLUB PHOENIX -->
-    <section class="deep-dive club" id="club">
-        <div class="container">
-            <h2>CLUB PHOENIX <span class="live-badge">Live Alpha</span></h2>
-            <div class="deep-dive-compact">
-                <div class="video-placeholder">
-                    <span>Walkthrough Video</span>
+    <!-- ===== IRON ARCADE DEEP DIVE ===== -->
+    <div class="deep-dive-container">
+        <div class="deep-dive-sticky arcade-bg">
+            <div class="deep-dive-content">
+                <div class="deep-dive-header">
+                    <h2 class="deep-dive-title blue">THE IRON ARCADE</h2>
                 </div>
-                <div>
-                    <h3>Product Overview</h3>
-                    <p style="color: var(--light-gray); margin-bottom: 16px; font-size: 0.95rem;">18+ venue with live DJ performances, arcade machines, and virtual bar. Warehouse rave meets retro arcade.</p>
-                    <h3>Why This Market</h3>
-                    <ul style="font-size: 0.95rem;">
-                        <li><strong>17-24 demo</strong> fastest-growing on Roblox</li>
-                        <li><strong>Virtual concerts:</strong> Lil Nas X 33M</li>
-                        <li><strong>Brands seeking</strong> Gen Z channels</li>
-                    </ul>
-                    <p style="color: var(--gray); margin-top: 12px; font-size: 0.85rem;">Prior experience: Built and operated <strong style="color: var(--white);">The Block</strong></p>
-                </div>
-                <div>
-                    <h3>Revenue Streams</h3>
-                    <ul style="font-size: 0.95rem;">
-                        <li><strong>Cover charges:</strong> $2-5</li>
-                        <li><strong>VIP tables:</strong> $10-25</li>
-                        <li><strong>Cosmetics & Brand activations</strong></li>
-                        <li><strong>Artist partnerships</strong></li>
-                        <li><strong>Arcade cabinets</strong></li>
-                    </ul>
-                    <div class="revenue-target" style="margin-top: 16px;">
-                        <p class="label">Target: 2 Events/Week</p>
-                        <div class="amount">$6K/mo</div>
+                <div class="deep-dive-grid">
+                    <div class="video-placeholder">
+                        <span>Prototype Video</span>
+                    </div>
+                    <div class="deep-dive-col">
+                        <h3>Two Products in One</h3>
+                        <p>Standalone arcade game plus embeddable cabinets for other Roblox developers to distribute.</p>
+                        <h3>Monetization</h3>
+                        <ul>
+                            <li><strong>Pay-per-play:</strong> Robux per game</li>
+                            <li><strong>Standalone:</strong> direct revenue</li>
+                            <li><strong>Distribution:</strong> partner gamepass split</li>
+                        </ul>
+                    </div>
+                    <div class="deep-dive-col">
+                        <h3>Why Developers Want This</h3>
+                        <ul>
+                            <li><strong>Passive revenue</strong> from cabinet usage</li>
+                            <li><strong>Engagement boost</strong> from minigames</li>
+                            <li><strong>Zero dev cost:</strong> drag and drop</li>
+                            <li><strong>Global leaderboards</strong></li>
+                        </ul>
+                        <div class="revenue-box">
+                            <p class="label">Target: 50 Partner Games</p>
+                            <div class="amount blue">$5K/mo</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- BUDGET -->
-    <section class="budget" id="budget">
-        <div class="container">
-            <h2>FINANCIALS</h2>
-            <div class="budget-grid">
+    <!-- ===== CLUB PHOENIX DEEP DIVE ===== -->
+    <div class="deep-dive-container">
+        <div class="deep-dive-sticky club-bg">
+            <div class="deep-dive-content">
+                <div class="deep-dive-header">
+                    <h2 class="deep-dive-title purple">CLUB PHOENIX</h2>
+                    <span class="live-badge">Live Alpha</span>
+                </div>
+                <div class="deep-dive-grid">
+                    <div class="video-placeholder">
+                        <span>Walkthrough Video</span>
+                    </div>
+                    <div class="deep-dive-col">
+                        <h3>Product Overview</h3>
+                        <p>18+ venue with live DJ performances, arcade machines, and virtual bar. Warehouse rave meets retro arcade.</p>
+                        <h3>Why This Market</h3>
+                        <ul>
+                            <li><strong>17-24 demo</strong> fastest-growing on Roblox</li>
+                            <li><strong>Virtual concerts:</strong> Lil Nas X 33M</li>
+                            <li><strong>Brands seeking</strong> Gen Z channels</li>
+                        </ul>
+                        <p style="color: var(--gray); margin-top: 16px; font-size: 0.9rem;">
+                            Prior experience: Built <strong style="color: var(--white);">The Block</strong>
+                        </p>
+                    </div>
+                    <div class="deep-dive-col">
+                        <h3>Revenue Streams</h3>
+                        <ul>
+                            <li><strong>Cover charges:</strong> $2-5</li>
+                            <li><strong>VIP tables:</strong> $10-25</li>
+                            <li><strong>Cosmetics & Brand activations</strong></li>
+                            <li><strong>Artist partnerships</strong></li>
+                            <li><strong>Arcade cabinets</strong></li>
+                        </ul>
+                        <div class="revenue-box">
+                            <p class="label">Target: 2 Events/Week</p>
+                            <div class="amount purple">$6K/mo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FINANCIALS ===== -->
+    <section class="financials-section">
+        <div class="financials-content">
+            <h2 class="section-title" data-animate>FINANCIALS</h2>
+            <div class="financials-grid">
                 <div>
-                    <h3>Use of Funds (Borders RTS)</h3>
+                    <h3 style="color: var(--gold); font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px;">Use of Funds (Borders RTS)</h3>
                     <table class="budget-table">
-                        <tr>
-                            <th>Category</th>
-                            <th>Amount</th>
-                        </tr>
-                        <tr>
-                            <td>Staff ($2K each, 2 members)</td>
-                            <td>$4,000</td>
-                        </tr>
-                        <tr>
-                            <td>Claude Max (2 subscriptions)</td>
-                            <td>$400</td>
-                        </tr>
-                        <tr>
-                            <td>Marketing</td>
-                            <td>$200</td>
-                        </tr>
-                        <tr>
-                            <td>Contracts (assets, sound)</td>
-                            <td>$400</td>
-                        </tr>
-                        <tr>
-                            <td>Total (1 month of development)</td>
-                            <td>$5,000</td>
-                        </tr>
+                        <tr><th>Category</th><th>Amount</th></tr>
+                        <tr><td>Staff ($2K each, 2 members)</td><td>$4,000</td></tr>
+                        <tr><td>Claude Max (2 subscriptions)</td><td>$400</td></tr>
+                        <tr><td>Marketing</td><td>$200</td></tr>
+                        <tr><td>Contracts (assets, sound)</td><td>$400</td></tr>
+                        <tr><td>Total (1 month of development)</td><td>$5,000</td></tr>
                     </table>
                 </div>
                 <div>
-                    <h3>Investment Structure</h3>
+                    <h3 style="color: var(--gold); font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px;">Investment Structure</h3>
                     <table class="budget-table">
-                        <tr>
-                            <th>Product</th>
-                            <th>Investment</th>
-                        </tr>
-                        <tr>
-                            <td>Borders RTS (current ask)</td>
-                            <td>$5,000</td>
-                        </tr>
-                        <tr>
-                            <td>The Iron Arcade (future)</td>
-                            <td>$10,000</td>
-                        </tr>
-                        <tr>
-                            <td>Club Phoenix (future)</td>
-                            <td>$10,000</td>
-                        </tr>
-                        <tr>
-                            <td>Total (all products)</td>
-                            <td>$25,000</td>
-                        </tr>
+                        <tr><th>Product</th><th>Investment</th></tr>
+                        <tr><td>Borders RTS (current ask)</td><td>$5,000</td></tr>
+                        <tr><td>The Iron Arcade (future)</td><td>$10,000</td></tr>
+                        <tr><td>Club Phoenix (future)</td><td>$10,000</td></tr>
+                        <tr><td>Total (all products)</td><td>$25,000</td></tr>
                     </table>
-                    <div class="budget-note" style="margin-top: 24px;">
+                    <div class="budget-note">
                         <strong>Current ask: $5,000 for Borders RTS.</strong><br><br>
                         We pay back principal from revenue before requesting additional funding for future products.
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- REVENUE PROJECTION -->
-    <section class="deep-dive" id="projection">
-        <div class="container">
-            <h2>12-MONTH PROJECTION</h2>
-            <div style="overflow-x: auto;">
-                <table class="budget-table" style="width: 100%; min-width: 800px;">
-                    <tr>
-                        <th>Month</th>
-                        <th>Product</th>
-                        <th>Capital Request</th>
-                        <th>Dev Time</th>
-                        <th>Revenue Start</th>
-                        <th>Payback</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Borders RTS</td>
-                        <td style="color: var(--gold);">$5,000</td>
-                        <td>1 month</td>
-                        <td>Month 2</td>
-                        <td>Month 3</td>
-                    </tr>
-                    <tr>
-                        <td>4-5</td>
-                        <td>Iron Arcade</td>
-                        <td style="color: var(--gold);">$10,000</td>
-                        <td>2 months</td>
-                        <td>Month 6</td>
-                        <td>Month 8</td>
-                    </tr>
-                    <tr>
-                        <td>9-10</td>
-                        <td>Club Phoenix</td>
-                        <td style="color: var(--gold);">$10,000</td>
-                        <td>2 months</td>
-                        <td>Month 11</td>
-                        <td>Month 12</td>
-                    </tr>
-                </table>
-            </div>
-            <div style="margin-top: 48px;">
-                <h3>Monthly Revenue Targets (Post-Launch)</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 24px;">
-                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--mint);">
-                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">Borders RTS</p>
-                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--mint);">$2,500/mo</p>
-                    </div>
-                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--blue);">
-                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">Iron Arcade</p>
-                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--blue);">$5,000/mo</p>
-                    </div>
-                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--purple);">
-                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">Club Phoenix</p>
-                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--purple);">$6,000/mo</p>
-                    </div>
-                    <div style="background: var(--dark-2); padding: 24px; border-left: 3px solid var(--orange);">
-                        <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 8px;">RbxSync</p>
-                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--orange);">$1,000/mo</p>
-                    </div>
+            <h3 style="color: var(--gold); font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 80px; margin-bottom: 24px;">Monthly Revenue Targets (Post-Launch)</h3>
+            <div class="projection-cards">
+                <div class="projection-card borders" data-animate>
+                    <p class="name">Borders RTS</p>
+                    <p class="value">$2,500/mo</p>
                 </div>
-                <p style="margin-top: 32px; color: var(--light-gray); text-align: center;">
-                    <strong style="color: var(--gold);">Combined Target (Month 12+):</strong> $14,500/month
-                </p>
+                <div class="projection-card arcade" data-animate>
+                    <p class="name">Iron Arcade</p>
+                    <p class="value">$5,000/mo</p>
+                </div>
+                <div class="projection-card club" data-animate>
+                    <p class="name">Club Phoenix</p>
+                    <p class="value">$6,000/mo</p>
+                </div>
+                <div class="projection-card rbxsync" data-animate>
+                    <p class="name">RbxSync</p>
+                    <p class="value">$1,000/mo</p>
+                </div>
             </div>
+            <p class="projection-total">
+                <strong>Combined Target (Month 12+):</strong> $14,500/month
+            </p>
         </div>
     </section>
 
-    <!-- TEAM -->
-    <section class="team" id="team">
-        <div class="container">
-            <h2>TEAM</h2>
+    <!-- ===== TEAM ===== -->
+    <section class="team-section">
+        <div class="team-content">
+            <h2 class="section-title" data-animate>TEAM</h2>
             <div class="team-grid">
-                <div class="team-card">
-                    <img src="marissa.jpg" alt="Marissa Cheves" class="team-photo" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px;">
+                <div class="team-card" data-animate>
+                    <img src="marissa.jpg" alt="Marissa Cheves" class="team-photo">
                     <h4>Marissa Cheves</h4>
                     <p class="role">Founder & Team Lead</p>
                     <p>5+ years building on Roblox. <span class="highlight">Built RbxSync from the ground up</span>, the same tool that powers our development and generates license revenue.</p>
-                    <p style="margin-top: 12px;">Previously built and operated <span class="highlight">The Block</span>, a Roblox nightclub. Learnings from that project directly inform Club Phoenix.</p>
+                    <p style="margin-top: 16px;">Previously built and operated <span class="highlight">The Block</span>, a Roblox nightclub. Learnings from that project directly inform Club Phoenix.</p>
                 </div>
-                <div class="team-card">
-                    <img src="ben.jpg" alt="Benjamin Marsh" class="team-photo" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px;">
+                <div class="team-card" data-animate>
+                    <img src="ben.jpg" alt="Benjamin Marsh" class="team-photo">
                     <h4>Benjamin Marsh</h4>
                     <p class="role">Developer</p>
                     <p>5+ years Roblox development. Multiple shipped titles. <span class="highlight">Systems specialist</span> in gameplay programming, networking, and data architecture.</p>
-                    <p style="margin-top: 12px;">Proven track record delivering polished multiplayer experiences. Expert in Luau and Roblox's technical stack.</p>
+                    <p style="margin-top: 16px;">Proven track record delivering polished multiplayer experiences. Expert in Luau and Roblox's technical stack.</p>
                 </div>
             </div>
 
-            <!-- Collaboration History -->
-            <div style="margin-top: 64px; text-align: center;">
-                <h3 style="margin-bottom: 32px;">COLLABORATION HISTORY</h3>
-                <p style="color: var(--light-gray); max-width: 800px; margin: 0 auto 32px; line-height: 1.8;">
+            <div class="collab-section">
+                <h3>Collaboration History</h3>
+                <p>
                     Worked together on <strong style="color: var(--white);">5+ projects</strong> across 2 teams.
                     Built <strong style="color: var(--white);">Pirates vs. Ninjas</strong> from scratch together (Marissa on design, Ben on tech).
                     Co-developed alpha versions of Borders RTS, Club Phoenix, and Iron Arcade internal prototypes.
                 </p>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 64px; flex-wrap: wrap;">
-                    <div style="text-align: center;">
-                        <img src="https://supersocial.com/wp-content/uploads/2023/03/supersocial-logo-white.svg" alt="Supersocial" style="height: 32px; margin-bottom: 8px; filter: brightness(0.9);" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <span style="display: none; color: var(--white); font-weight: 600;">Supersocial</span>
-                        <p style="font-size: 0.85rem; color: var(--gray);">2021-2022</p>
+                <div class="collab-logos">
+                    <div class="collab-logo">
+                        <img src="https://supersocial.com/wp-content/uploads/2023/03/supersocial-logo-white.svg" alt="Supersocial" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <strong style="display: none; color: var(--white);">Supersocial</strong>
+                        <span>2021-2022</span>
                     </div>
-                    <div style="text-align: center;">
-                        <img src="https://audioscape.ai/Text_Transparent_White.png" alt="Audioscape" style="height: 28px; margin-bottom: 8px;">
-                        <p style="font-size: 0.85rem; color: var(--gray);">2025-2026</p>
+                    <div class="collab-logo">
+                        <img src="https://audioscape.ai/Text_Transparent_White.png" alt="Audioscape">
+                        <span>2025-2026</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TECH STACK -->
-    <section class="deep-dive alt" id="tech-stack">
-        <div class="container">
-            <h2>OUR TECHNICAL ADVANTAGE</h2>
-            <p style="color: var(--light-gray); max-width: 800px; margin-bottom: 48px; font-size: 1.1rem; line-height: 1.8;">
+    <!-- ===== TECH STACK ===== -->
+    <section class="tech-section">
+        <div class="tech-content">
+            <h2 class="section-title" data-animate>OUR TECHNICAL ADVANTAGE</h2>
+            <p class="tech-intro">
                 We are a game company that built a tool to accelerate our development. Our internal tech stack enables a 2-person team to match the output of teams 3x our size.
             </p>
-            <div class="win-grid">
-                <div class="win-card">
+            <div class="tech-grid">
+                <div class="tech-card" data-animate>
                     <h4>RbxSync</h4>
                     <p>End-to-end automated dev stack for Roblox games. Git version control, VS Code editing, bidirectional sync with Studio. Also generates license revenue ($60/license).</p>
                 </div>
-                <div class="win-card">
+                <div class="tech-card" data-animate>
                     <h4>Multi-Agent Architecture</h4>
                     <p>AI agents via MCP handle routine tasks, code generation, and testing. Claude integration throughout the development workflow.</p>
                 </div>
-                <div class="win-card">
+                <div class="tech-card" data-animate>
                     <h4>Managed Organization</h4>
                     <p>Structured project management with Linear integration, automated issue tracking, and coordinated multi-agent development sessions.</p>
                 </div>
-                <div class="win-card">
+                <div class="tech-card" data-animate>
                     <h4>Iteration Speed</h4>
                     <p>2-3x faster development cycles compared to traditional Roblox workflows. Changes sync instantly between local files and Studio.</p>
                 </div>
@@ -1969,62 +2069,35 @@
         </div>
     </section>
 
-    <!-- WHY WE WIN -->
-    <section class="why-win" id="why-win">
-        <div class="container">
-            <h2>WHY WE WIN</h2>
+    <!-- ===== WHY WE WIN ===== -->
+    <section class="win-section">
+        <div class="win-content">
+            <h2 class="section-title" data-animate>WHY WE WIN</h2>
             <div class="win-grid">
-                <div class="win-card">
+                <div class="win-card" data-animate>
                     <h4>We're Not Starting From Zero</h4>
                     <table class="comparison-table">
-                        <tr>
-                            <th>Product</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr>
-                            <td>Borders RTS</td>
-                            <td>Live Alpha</td>
-                        </tr>
-                        <tr>
-                            <td>Club Phoenix</td>
-                            <td>Live Alpha</td>
-                        </tr>
-                        <tr>
-                            <td>RbxSync</td>
-                            <td>Launched</td>
-                        </tr>
+                        <tr><th>Product</th><th>Status</th></tr>
+                        <tr><td>Borders RTS</td><td>Live Alpha</td></tr>
+                        <tr><td>Club Phoenix</td><td>Live Alpha</td></tr>
+                        <tr><td>RbxSync</td><td>Launched</td></tr>
                     </table>
                 </div>
-                <div class="win-card">
+                <div class="win-card" data-animate>
                     <h4>We Built Our Own Stack</h4>
                     <table class="comparison-table">
-                        <tr>
-                            <th>Capability</th>
-                            <th>Smokestack</th>
-                        </tr>
-                        <tr>
-                            <td>Version Control</td>
-                            <td>Git-based</td>
-                        </tr>
-                        <tr>
-                            <td>Code Editing</td>
-                            <td>VS Code + Studio</td>
-                        </tr>
-                        <tr>
-                            <td>AI Assistance</td>
-                            <td>Claude via MCP</td>
-                        </tr>
-                        <tr>
-                            <td>Iteration Speed</td>
-                            <td>2-3x faster</td>
-                        </tr>
+                        <tr><th>Capability</th><th>Smokestack</th></tr>
+                        <tr><td>Version Control</td><td>Git-based</td></tr>
+                        <tr><td>Code Editing</td><td>VS Code + Studio</td></tr>
+                        <tr><td>AI Assistance</td><td>Claude via MCP</td></tr>
+                        <tr><td>Iteration Speed</td><td>2-3x faster</td></tr>
                     </table>
                 </div>
-                <div class="win-card">
+                <div class="win-card" data-animate>
                     <h4>We've Done This Before</h4>
                     <p>Our team built and operated The Block, a Roblox nightclub. We learned what works, what doesn't, and what players actually want. Club Phoenix applies those lessons.</p>
                 </div>
-                <div class="win-card">
+                <div class="win-card" data-animate>
                     <h4>AI-Accelerated Production</h4>
                     <p>We leverage AI tools with combined shared experience to accelerate traditional productions and match a quality bar of teams 3x our size. RbxSync powers our workflow and generates license revenue.</p>
                 </div>
@@ -2032,100 +2105,105 @@
         </div>
     </section>
 
-    <!-- THE ASK -->
-    <section class="the-ask" id="ask">
-        <div class="container">
-            <div class="ask-amount">$5,000</div>
-            <p class="ask-subtitle">to accelerate Borders RTS from alpha to full launch</p>
-            <div class="ask-grid">
-                <div class="ask-card">
-                    <h4>What It Funds</h4>
-                    <ul>
-                        <li>1 month of development (2 months to payback)</li>
-                        <li>Monetization implementation</li>
-                        <li>Marketing push for launch</li>
-                        <li>Creator partnerships</li>
-                    </ul>
-                </div>
-                <div class="ask-card">
-                    <h4>What You Get</h4>
-                    <ul>
-                        <li>Principal-only repayment from game revenue</li>
-                        <li>No equity dilution</li>
-                        <li>No revenue share</li>
-                        <li>Money back first, before we expand</li>
-                    </ul>
-                </div>
-                <div class="ask-card">
-                    <h4>What Happens Next</h4>
-                    <ul>
-                        <li>We pay back $5K principal from Borders revenue</li>
-                        <li>Request additional funding after payback</li>
-                        <li>Future products funded through same structure</li>
-                        <li>Investor gets paid back before each new phase</li>
-                    </ul>
-                </div>
-                <div class="ask-card">
-                    <h4>Why This Is Low Risk</h4>
-                    <ul>
-                        <li>Products are already live, not speculative</li>
-                        <li>Team has shipped together (Pirates vs. Ninjas, The Block, RbxSync)</li>
-                        <li>Principal-only repayment, no equity</li>
-                        <li>Payback required before next funding request</li>
-                    </ul>
+    <!-- ===== THE ASK ===== -->
+    <div class="ask-container">
+        <div class="ask-sticky">
+            <div class="ask-content">
+                <div class="ask-amount" data-animate>$5,000</div>
+                <p class="ask-subtitle" data-animate>to accelerate Borders RTS from alpha to full launch</p>
+                <div class="ask-grid">
+                    <div class="ask-card" data-animate>
+                        <h4>What It Funds</h4>
+                        <ul>
+                            <li>1 month of development (2 months to payback)</li>
+                            <li>Monetization implementation</li>
+                            <li>Marketing push for launch</li>
+                            <li>Creator partnerships</li>
+                        </ul>
+                    </div>
+                    <div class="ask-card" data-animate>
+                        <h4>What You Get</h4>
+                        <ul>
+                            <li>Principal-only repayment from game revenue</li>
+                            <li>No equity dilution</li>
+                            <li>No revenue share</li>
+                            <li>Money back first, before we expand</li>
+                        </ul>
+                    </div>
+                    <div class="ask-card" data-animate>
+                        <h4>What Happens Next</h4>
+                        <ul>
+                            <li>We pay back $5K principal from Borders revenue</li>
+                            <li>Request additional funding after payback</li>
+                            <li>Future products funded through same structure</li>
+                            <li>Investor gets paid back before each new phase</li>
+                        </ul>
+                    </div>
+                    <div class="ask-card" data-animate>
+                        <h4>Why This Is Low Risk</h4>
+                        <ul>
+                            <li>Products are already live, not speculative</li>
+                            <li>Team has shipped together (Pirates vs. Ninjas, The Block, RbxSync)</li>
+                            <li>Principal-only repayment, no equity</li>
+                            <li>Payback required before next funding request</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- VISION -->
-    <section class="vision" id="vision">
-        <div class="container">
-            <h2>GAMES & DROIDS<br><span style="color: var(--gray); font-size: 0.5em;">THE BIGGER PICTURE</span></h2>
-            <div class="vision-cards">
-                <div class="vision-card active">
+    <!-- ===== VISION ===== -->
+    <section class="vision-section">
+        <div class="vision-content">
+            <h2 class="section-title" data-animate>GAMES & DROIDS</h2>
+            <p class="vision-subtitle">The Bigger Picture</p>
+            <div class="vision-grid">
+                <div class="vision-card active" data-animate>
                     <h4>ENTERTAINMENT</h4>
                     <p class="division">Smokestack Games</p>
                     <p>Gaming on Roblox. Generate initial capital and build a recognizable digital brand over 2 years. Multiple revenue streams, proven execution.</p>
                 </div>
-                <div class="vision-card">
+                <div class="vision-card" data-animate>
                     <h4>PRODUCTIVITY</h4>
                     <p class="division">AI Software</p>
                     <p>Tools that support hardware ecosystems. Entertainment revenue funds R&D. Think Nvidia's software ecosystem approach.</p>
                 </div>
-                <div class="vision-card">
+                <div class="vision-card" data-animate>
                     <h4>DROIDS</h4>
                     <p class="division">Desktop Pilots</p>
                     <p>Companion droids that drive user interfaces, virtual ecosystems, and streamline productivity. Long-term vision funded by earlier divisions.</p>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 48px; color: var(--gray); font-size: 0.95rem; position: relative; z-index: 1;">Entertainment funds Productivity funds Droids. Resource allocation shifts based on market needs.</p>
+            <p class="vision-footer">Entertainment funds Productivity funds Droids. Resource allocation shifts based on market needs.</p>
         </div>
     </section>
 
-    <!-- QUOTE -->
-    <section class="quote-section" id="quote">
-        <div class="container">
-            <blockquote>This investment supports a <strong>team with proven execution</strong>, <strong>live products</strong>, and a <strong>long-term vision</strong>.</blockquote>
+    <!-- ===== QUOTE ===== -->
+    <section class="quote-section">
+        <div class="quote-content">
+            <p class="quote-text" data-animate>
+                This investment supports a <strong>team with proven execution</strong>, <strong>live products</strong>, and a <strong>long-term vision</strong>.
+            </p>
         </div>
     </section>
 
-    <!-- NEXT STEPS -->
-    <section class="next-steps" id="steps">
-        <div class="container">
-            <h2>NEXT STEPS</h2>
+    <!-- ===== NEXT STEPS ===== -->
+    <section class="steps-section">
+        <div class="steps-content">
+            <h2 class="section-title" data-animate>NEXT STEPS</h2>
             <div class="steps-grid">
-                <div class="step-card">
+                <div class="step-card" data-animate>
                     <div class="step-number">01</div>
                     <h4>Schedule a Call</h4>
                     <p>Let's discuss terms, answer your questions, and walk through the roadmap in detail.</p>
                 </div>
-                <div class="step-card">
+                <div class="step-card" data-animate>
                     <div class="step-number">02</div>
                     <h4>Play What We've Built</h4>
                     <p>Play Borders RTS and Club Phoenix today. See RbxSync in action. These are live products.</p>
                 </div>
-                <div class="step-card">
+                <div class="step-card" data-animate>
                     <div class="step-number">03</div>
                     <h4>Finalize Investment</h4>
                     <p>Agree on terms and accelerate Borders RTS to full launch. First milestone delivery within 30 days.</p>
@@ -2134,77 +2212,105 @@
         </div>
     </section>
 
-    <!-- THANK YOU -->
-    <section class="thanks" id="thanks">
-        <div class="container">
-            <h1>THANK YOU.</h1>
-            <p class="contact-name">Marissa Cheves</p>
-            <p class="contact-email">marissacheves@gmail.com</p>
-            <p class="tagline">Smokestack Games | A Games & Droids Company</p>
+    <!-- ===== THANK YOU ===== -->
+    <section class="thanks-section">
+        <div class="thanks-content">
+            <h1 class="thanks-title">THANK YOU.</h1>
+            <p class="thanks-name">Marissa Cheves</p>
+            <p class="thanks-email">marissa@gamesanddroids.com</p>
+            <p class="thanks-tagline">Smokestack Games | A Games & Droids Company</p>
         </div>
     </section>
 
     <script>
-        // Navigation
-        const sections = document.querySelectorAll('section');
-        const nav = document.getElementById('nav');
-        const progress = document.getElementById('progress');
+        // Progress bar
+        const progressBar = document.getElementById('progress');
 
-        const sectionLabels = {
-            'hero': 'Title',
-            'elevator': 'Pitch',
-            'thesis': 'Thesis',
-            'products': 'Products',
-            'market': 'Market',
-            'timeline': 'Timeline',
-            'borders': 'Borders',
-            'arcade': 'Arcade',
-            'club': 'Club',
-            'budget': 'Budget',
-            'projection': 'Projection',
-            'team': 'Team',
-            'tech-stack': 'Tech Stack',
-            'why-win': 'Why Win',
-            'ask': 'The Ask',
-            'vision': 'Vision',
-            'quote': 'Quote',
-            'steps': 'Next Steps',
-            'thanks': 'Thanks'
+        // Scroll animations using Intersection Observer
+        const animateElements = document.querySelectorAll('[data-animate]');
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         };
 
-        sections.forEach((section) => {
-            const dot = document.createElement('button');
-            dot.className = 'nav-dot';
-            dot.setAttribute('data-label', sectionLabels[section.id] || section.id);
-            dot.addEventListener('click', () => {
-                section.scrollIntoView({ behavior: 'smooth' });
-            });
-            nav.appendChild(dot);
-        });
-
-        const navDots = document.querySelectorAll('.nav-dot');
-
-        // Intersection Observer for active states
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const index = Array.from(sections).indexOf(entry.target);
-                    navDots.forEach((dot, i) => {
-                        dot.classList.toggle('active', i === index);
-                    });
+                    entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.5 });
+        }, observerOptions);
 
-        sections.forEach(section => observer.observe(section));
+        animateElements.forEach(el => observer.observe(el));
 
-        // Progress bar
-        window.addEventListener('scroll', () => {
+        // Progress bar update
+        function updateProgress() {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
-            progress.style.width = scrollPercent + '%';
-        });
+            progressBar.style.width = scrollPercent + '%';
+        }
+
+        // Products horizontal scroll
+        const productsContainer = document.querySelector('.products-container');
+        const productsTrack = document.getElementById('products-track');
+
+        function updateProductsScroll() {
+            if (!productsContainer || !productsTrack) return;
+
+            const rect = productsContainer.getBoundingClientRect();
+            const containerHeight = productsContainer.offsetHeight;
+            const viewportHeight = window.innerHeight;
+
+            // Calculate scroll progress within the container
+            const scrollStart = -rect.top;
+            const scrollRange = containerHeight - viewportHeight;
+            const progress = Math.max(0, Math.min(1, scrollStart / scrollRange));
+
+            // Calculate total track width that needs to scroll
+            const trackWidth = productsTrack.scrollWidth;
+            const visibleWidth = productsContainer.offsetWidth - 160; // account for padding
+            const maxTranslate = trackWidth - visibleWidth;
+
+            const translateX = -progress * maxTranslate;
+            productsTrack.style.transform = `translateX(${translateX}px)`;
+        }
+
+        // Hero parallax
+        const heroContent = document.getElementById('hero-content');
+
+        function updateHeroParallax() {
+            if (!heroContent) return;
+            const scrollY = window.scrollY;
+            const opacity = Math.max(0, 1 - scrollY / 600);
+            const translateY = scrollY * 0.4;
+            const scale = 1 - scrollY * 0.0003;
+
+            heroContent.style.opacity = opacity;
+            heroContent.style.transform = `translateY(${translateY}px) scale(${Math.max(0.8, scale)})`;
+        }
+
+        // Combined scroll handler
+        let ticking = false;
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateProgress();
+                    updateProductsScroll();
+                    updateHeroParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Initial calls
+        updateProgress();
+        updateProductsScroll();
     </script>
 </body>
 </html>
